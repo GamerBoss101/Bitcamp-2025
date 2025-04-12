@@ -25,23 +25,30 @@ function Mobile() {
 
 function Web() {
 	const { session } = useDevice();
+	let isAuthenticated = session == null ? false : true;
+
 	return (
 		<main className="flex flex-col gap-[32px] row-start-2 items-center mt-10">
 			<h1 className="text-3xl sm:text-4xl font-bold tracking-[-.01em] text-center sm:text-left">
 				Welcome, {session?.name || "NULL"} !!
 			</h1>
 
-			<div className="card preset-tonal-success grid grid-cols-1 items-center gap-4 p-4 lg:grid-cols-[1fr_auto]">
-				<div className="gap-1">
-					<button type="button" className="btn hover:preset-tonal">
-						<a href="/auth/login?screen_hint=signup">Sign up</a>
+			{isAuthenticated ? (
+				<div>
+					<button type="button" className="btn bg-surface-500">
+						<a href="/auth/logout">Logout</a>
 					</button>
 				</div>
-			</div>
-			
-			<button>
-				<a href="/auth/login?screen_hint=login">Log in</a>
-			</button>
+			) : (
+				<div className="flex gap-4">
+					<button type="button" className="btn bg-surface-500">
+						<a href="/auth/login?screen_hint=signup">Sign up</a>
+					</button>
+					<button type="button" className="btn bg-surface-500">
+						<a href="/auth/login?screen_hint=login">Log in</a>
+					</button>
+				</div>
+			)}
 		</main>
 	);
 }
