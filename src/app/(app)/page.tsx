@@ -12,12 +12,21 @@ function Mobile() {
 					Welcome, {session?.name || "NULL"} !!
 				</h1>
 
-				<button>
-					<a href="/auth/login?screen_hint=signup">Sign up</a>
-				</button>
-				<button>
-					<a href="/auth/login?screen_hint=login">Log in</a>
-				</button>
+				<div className="card preset-tonal-success items-center gap-4 p-4 lg:grid-cols-[1fr_auto]">
+					<div className="gap-1">
+						<button type="button" className="btn hover:preset-tonal">
+							<a href="/auth/login?screen_hint=signup">Sign up</a>
+						</button>
+					</div>
+				</div>
+
+				<div className="card preset-tonal-success items-center gap-4 p-4 lg:grid-cols-[1fr_auto]">
+					<div className="gap-1">
+						<button type="button" className="btn hover:preset-tonal">
+							<a href="/auth/login?screen_hint=login">Log In</a>
+						</button>
+					</div>
+				</div>
 			</main>
 		</div>
 	);
@@ -33,6 +42,7 @@ function Web() {
 				Welcome, {session?.name || "NULL"} !!
 			</h1>
 
+<<<<<<< HEAD
 			{isAuthenticated ? (
 				<div>
 					<button type="button" className="btn bg-surface-500">
@@ -49,6 +59,23 @@ function Web() {
 					</button>
 				</div>
 			)}
+=======
+			<div className="card preset-tonal-success items-center gap-4 p-4 lg:grid-cols-[1fr_auto]">
+				<div className="gap-1">
+					<button type="button" className="btn hover:preset-tonal">
+						<a href="/auth/login?screen_hint=signup">Sign up</a>
+					</button>
+				</div>
+			</div>
+
+			<div className="card preset-tonal-success items-center gap-4 p-4 lg:grid-cols-[1fr_auto]">
+				<div className="gap-1">
+					<button type="button" className="btn hover:preset-tonal">
+						<a href="/auth/login?screen_hint=login">Log in</a>
+					</button>
+				</div>
+			</div>
+>>>>>>> 3361d0451f88d7bbe1a241b09f5cc013c2abf8f7
 		</main>
 	);
 }
