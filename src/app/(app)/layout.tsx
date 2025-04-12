@@ -18,9 +18,9 @@ export default function RootLayout({
 
             <Image 
                 src="/drinkhappylogo.png"
-                alt="Hero Image"
-                width={200}
-                height={200}
+                alt="Drink Happy Logo Image"
+                width={500}
+                height={500}
                 className="mx-auto w-1/2"
             />
             {children}

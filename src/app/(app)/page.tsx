@@ -7,11 +7,6 @@ function Mobile() {
 
 	return (
 		<div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-			<img
-				src="./drinkhappylogo.png"
-				alt="Drink Happy Logo"
-				className="row-start-1 h-10 sm:h-12 object-contain"
-			/>
 			<main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
 				<h1 className="text-3xl sm:text-4xl font-bold tracking-[-.01em] text-center sm:text-left">
 					Welcome, {session?.name || "NULL"} !!
@@ -31,15 +26,15 @@ function Mobile() {
 function Web() {
 	const { session } = useDevice();
 	return (
-		<main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
+		<main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start ml-10">
 			<h1 className="text-3xl sm:text-4xl font-bold tracking-[-.01em] text-center sm:text-left">
 				Welcome, {session?.name || "NULL"} !!
 			</h1>
 
-			<button>
+			<button className="ml-20 mt-2">
 				<a href="/auth/login?screen_hint=signup">Sign up</a>
 			</button>
-			<button>
+			<button className="ml-20 mt-2">
 				<a href="/auth/login?screen_hint=login">Log in</a>
 			</button>
 		</main>
