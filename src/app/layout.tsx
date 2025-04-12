@@ -7,6 +7,8 @@ import { useEffect, useState } from "react";
 import * as rdd from "react-device-detect";
 import { useRouter } from "next/navigation";
 
+import MobileNav from "@/lib/components/MobileNav";
+
 const geistSans = Geist({
 	variable: "--font-geist-sans",
 	subsets: ["latin"],
@@ -30,15 +32,9 @@ export default function RootLayout({
 	useEffect(() => {
 		setIsSafari(rdd.isSafari);
 		setIsMobile(rdd.isMobile);
-
-		console.log("isMobile", isMobile);
-		console.log("isSafari", isSafari);
 	}, []);
 
     useEffect(() => {
-        if (isMobile && isSafari) {
-            router.push("/mobile");
-        }
     }, [isMobile, isSafari, router]);
 
 	return (
@@ -48,6 +44,9 @@ export default function RootLayout({
 				suppressHydrationWarning={true}
 			>
 				{children}
+				{isMobile && (
+					<MobileNav />
+				)}
 			</body>
 		</html>
 	);
