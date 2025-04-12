@@ -14,7 +14,7 @@ export default function RootLayout({
 
     const { isMobile, isSafari } = useDevice();
     return (
-        <main>
+        <main className="card grid grid-rows-[1fr_auto]">
 
             <Image 
                 src="/drinkhappylogo.png"
