@@ -1,9 +1,9 @@
 "use client";
 
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+import "../lib/css/globals.css";
 
-import { DeviceProvider } from "@/lib/context/DeviceContext";
+import { DeviceProvider, useDevice } from "@/lib/context/DeviceContext";
 import MobileNav from "@/lib/components/MobileNav";
 
 const geistSans = Geist({
@@ -29,6 +29,8 @@ export default function RootLayout({
             >
                 <DeviceProvider>
                     {children}
+
+                    
                 </DeviceProvider>
             </body>
         </html>
