@@ -54,7 +54,7 @@ export default function PointsGuidePage() {
       </p>
 
     
-      <p>
+      <ul>
 						Game Points System:
 						<ul className="list-disc pl-5 mt-1 space-y-1">
 							<li> +15 points for drinking ≥100 oz of water </li>
@@ -62,7 +62,7 @@ export default function PointsGuidePage() {
 							<li> +15 points for staying under the sugar cap all day </li>
 							<li> Exceeding 400mg caffeine limit or 30.5g sugar limit = 0 pts logged for those drinks </li>
 						</ul>
-			</p>
+			</ul>
 
         <div className="bg-[color:var(--color-surface-600)] rounded-xl px-6 py-5 my-6 shadow-sm">
         
