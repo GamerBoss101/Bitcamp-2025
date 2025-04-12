@@ -13,7 +13,8 @@ export default function InfoPage() {
         health recommendations.
       </p>
 
-      <h2 className="text-2xl font-semibold mt-8 mb-2 text-[color:var(--color-warning-300)]">
+      <div className="bg-[color:var(--color-surface-600)] rounded-xl px-6 py-5 my-6 shadow-sm">
+      <h2 className="text-2xl font-semibold mt-0 mb-2 text-[color:var(--color-warning-300)]">
         Water
       </h2>
       <ul className="list-disc pl-5 text-neutral-200 space-y-1">
@@ -29,9 +30,12 @@ export default function InfoPage() {
       <p className="font-semibold italic text-[color:var(--color-surface-300)] mt-1">
         Carry a refillable water bottle to stay hydrated. Drinking water will earn you the most points!
       </p>
+      </div>
 
 
-      <h2 className="text-2xl font-semibold mt-8 mb-2 text-[color:var(--color-warning-300)]">
+
+      <div className="bg-[color:var(--color-success-600)] rounded-xl px-6 py-5 my-6 shadow-sm">
+      <h2 className="text-2xl font-semibold mt-0 mb-2 text-[color:var(--color-warning-200)]">
         Caffeine
       </h2>
       <ul className="list-disc pl-5 text-neutral-200 space-y-1">
@@ -49,11 +53,14 @@ export default function InfoPage() {
         </ul>
         </li>
       </ul>
-      <p className="font-semibold italic text-[color:var(--color-surface-300)] mt-1">
+      <p className="font-semibold italic text-[color:var(--color-surface-700)] mt-1">
       Exceeding the 400 mg daily limit will result in no points awarded for additional caffeinated drinks that day!
       </p>
+      </div>
 
-      <h2 className="text-2xl font-semibold mt-8 mb-2 text-[color:var(--color-warning-300)]">
+
+      <div className="bg-[color:var(--color-surface-600)] rounded-xl px-6 py-5 my-6 shadow-sm">
+      <h2 className="text-2xl font-semibold mt-0 mb-2 text-[color:var(--color-warning-300)]">
         Added Sugar Drinks
       </h2>
       <ul className="list-disc pl-5 text-neutral-200 space-y-1">
@@ -77,9 +84,13 @@ export default function InfoPage() {
       <p className="font-semibold italic text-[color:var(--color-surface-300)] mt-1">
       Surpassing the daily sugar limit will result in zero points awarded for any further drink entries for that day!
       </p>
+      </div>
 
 
-      <h2 className="text-2xl font-semibold mt-8 mb-2 text-[color:var(--color-warning-300)]">
+
+
+      <div className="bg-[color:var(--color-success-600)] rounded-xl px-6 py-5 my-6 shadow-sm">
+      <h2 className="text-2xl font-semibold mt-0 mb-2 text-[color:var(--color-warning-300)]">
       Juice and Flavored Drinks
       </h2>
       <ul className="list-disc pl-5 text-neutral-200 space-y-1">
@@ -92,12 +103,14 @@ export default function InfoPage() {
 
         </li>
       </ul>
-      <p className="font-semibold italic text-[color:var(--color-surface-300)] mt-1">
+      <p className="font-semibold italic text-[color:var(--color-surface-700)] mt-1">
       These drinks still count to the daily sugar intake but you’ll earn more points with juice than most other drinks! 
       </p>
+      </div>
 
 
-      <h2 className="text-2xl font-semibold mt-8 mb-2 text-[color:var(--color-warning-300)]">
+      <div className="bg-[color:var(--color-surface-600)] rounded-xl px-6 py-5 my-6 shadow-sm">
+      <h2 className="text-2xl font-semibold mt-0 mb-2 text-[color:var(--color-warning-300)]">
       Milk and Milk Alternatives
       </h2>
       <ul className="list-disc pl-5 text-neutral-200 space-y-1">
@@ -112,7 +125,7 @@ export default function InfoPage() {
       <p className="font-semibold italic text-[color:var(--color-surface-300)] mt-1">
       Unsweetened/regular milk or milk alternatives can allow you to gain more points! 
       </p>
-
+      </div>
 
       <div className="h-6" /> 
       <div className="h-6" /> 
