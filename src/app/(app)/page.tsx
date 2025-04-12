@@ -12,12 +12,21 @@ function Mobile() {
 					Welcome, {session?.name || "NULL"} !!
 				</h1>
 
-				<button>
-					<a href="/auth/login?screen_hint=signup">Sign up</a>
-				</button>
-				<button>
-					<a href="/auth/login?screen_hint=login">Log in</a>
-				</button>
+				<div className="card preset-tonal-success items-center gap-4 p-4 lg:grid-cols-[1fr_auto]">
+					<div className="gap-1">
+						<button type="button" className="btn hover:preset-tonal">
+							<a href="/auth/login?screen_hint=signup">Sign up</a>
+						</button>
+					</div>
+				</div>
+
+				<div className="card preset-tonal-success items-center gap-4 p-4 lg:grid-cols-[1fr_auto]">
+					<div className="gap-1">
+						<button type="button" className="btn hover:preset-tonal">
+							<a href="/auth/login?screen_hint=login">Log In</a>
+						</button>
+					</div>
+				</div>
 			</main>
 		</div>
 	);
@@ -31,17 +40,21 @@ function Web() {
 				Welcome, {session?.name || "NULL"} !!
 			</h1>
 
-			<div className="card preset-tonal-success grid grid-cols-1 items-center gap-4 p-4 lg:grid-cols-[1fr_auto]">
+			<div className="card preset-tonal-success items-center gap-4 p-4 lg:grid-cols-[1fr_auto]">
 				<div className="gap-1">
 					<button type="button" className="btn hover:preset-tonal">
 						<a href="/auth/login?screen_hint=signup">Sign up</a>
 					</button>
 				</div>
 			</div>
-			
-			<button>
-				<a href="/auth/login?screen_hint=login">Log in</a>
-			</button>
+
+			<div className="card preset-tonal-success items-center gap-4 p-4 lg:grid-cols-[1fr_auto]">
+				<div className="gap-1">
+					<button type="button" className="btn hover:preset-tonal">
+						<a href="/auth/login?screen_hint=login">Log in</a>
+					</button>
+				</div>
+			</div>
 		</main>
 	);
 }

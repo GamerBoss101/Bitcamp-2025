@@ -21,7 +21,7 @@ export default function RootLayout({
                 alt="Drink Happy Logo Image"
                 width={500}
                 height={500}
-                className="h-auto mx-auto w-1/2"
+                className="h-auto mx-auto w-1/3"
             />
             {children}
             { isMobile && isSafari ? (
