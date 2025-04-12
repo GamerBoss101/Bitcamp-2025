@@ -26,15 +26,15 @@ function Mobile() {
 function Web() {
 	const { session } = useDevice();
 	return (
-		<main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start ml-10">
+		<main className="flex flex-col gap-[32px] row-start-2 items-center mt-10">
 			<h1 className="text-3xl sm:text-4xl font-bold tracking-[-.01em] text-center sm:text-left">
 				Welcome, {session?.name || "NULL"} !!
 			</h1>
 
-			<button className="ml-20 mt-2">
+			<button>
 				<a href="/auth/login?screen_hint=signup">Sign up</a>
 			</button>
-			<button className="ml-20 mt-2">
+			<button>
 				<a href="/auth/login?screen_hint=login">Log in</a>
 			</button>
 		</main>
