@@ -42,7 +42,7 @@ export default function RootLayout({
     }, [isMobile, isSafari, router]);
 
 	return (
-		<html data-theme="rose" lang="en">
+		<html data-theme="drinky" lang="en">
 			<body
 				className={`${geistSans.variable} ${geistMono.variable} antialiased`}
 				suppressHydrationWarning={true}
