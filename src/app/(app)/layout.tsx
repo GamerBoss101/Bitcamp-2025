@@ -14,10 +14,6 @@ export default function RootLayout({
     return (
         <main>
             {children}
-
-            <div className="fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-gray-300">
-                    <MobileNav />
-                </div>
             { isMobile && isSafari ? (
                 <div className="fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-gray-300">
                     <MobileNav />
