@@ -48,10 +48,3 @@ The app uses a gamified scoring system to encourage healthy drink choices:
 | Coca-Cola           | 8           | 34            | 39        | 0             | Exceeds sugar limit               |
 | 100% Fruit Juice    | 8           | 0             | 22        | 25            | 0 points after 20g sugar          |
 | Dairy Milk (low-fat)| 8           | 0             | 12        | 25            | +0.25 calcium bonus for low-fat   |
-
-## Installation
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/your-repo/drink-happy.git
-   cd drink-happy
