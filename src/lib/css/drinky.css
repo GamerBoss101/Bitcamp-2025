@@ -1,6 +1,6 @@
 [data-theme='drinky'] {
 	--text-scaling: 1.2;
-	--base-font-color: var(--color-primary-800);
+	--base-font-color: var(--color-warning-800);
 	--base-font-color-dark: var(--color-warning-300);
 	--base-font-family: ui-rounded, 'Hiragino Maru Gothic ProN', Quicksand, Comfortaa, Manjari, 'Arial Rounded MT', 'Arial Rounded MT Bold', Calibri, source-sans-pro, sans-serif;
 	--base-font-size: inherit;
