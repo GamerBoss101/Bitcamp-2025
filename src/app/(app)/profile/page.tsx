@@ -1,11 +1,30 @@
 "use client";
 
-import React from "react";
+import { useEffect, useState } from "react";
 import { useDevice } from "@/lib/context/DeviceContext";
-import { useRouter } from "next/navigation";
 
-export default function ProfilePage() {
+function Mobile() {
 	const { isAuthenticated, session } = useDevice();
+
+	const [bio, setBio] = useState("");
+
+	function handleBioSubmit(e: React.FormEvent) {
+		e.preventDefault();
+		if (bio.length > 0) {
+			const formData = new FormData();
+			formData.append("bio", bio);
+
+			fetch("/api/me", {
+				method: "POST",
+				body: formData, // Automatically sets Content-Type to multipart/form-data
+			});
+
+			// Show a success message
+			alert("Bio saved!");
+		} else {
+			alert("Please enter a bio.");
+		}
+	}
 
 	return (
 		<div className="px-6 py-10 max-w-full lg:max-w-1/2 mx-auto font-sans text-neutral-100">
@@ -17,7 +36,7 @@ export default function ProfilePage() {
 				<div className="flex flex-col items-center mt-6">
 					{isAuthenticated && (
 						<img
-							src={"/p" + session?.avatar + ".png"}
+							src={"/avatar/p" + session?.avatar + ".png"}
 							alt="Profile Preview"
 							className="w-42 h-42 rounded-full object-cover bg-surface-700"
 						/>
@@ -28,12 +47,11 @@ export default function ProfilePage() {
 				</div>
 			</div>
 
-			{/* <p className="mb-6">{bio || "No bio yet..."}</p>
+			<p className="mb-6">{bio || "No bio yet..."}</p>
 
 			<form onSubmit={handleBioSubmit} className="mb-6 space-y-2">
 				<textarea
 					className="w-full p-2 rounded bg-neutral-800 text-white"
-					value={bio}
 					onChange={(e) => setBio(e.target.value)}
 					placeholder="Update your bio..."
 					rows={3}
@@ -44,8 +62,7 @@ export default function ProfilePage() {
 				>
 					Save Bio
 				</button>
-				{saved && <p className="text-green-400 text-sm">Bio saved!</p>}
-			</form> */}
+			</form>
 
 			{/* Friends */}
 			<div className="bg-[color:var(--color-surface-600)] rounded-xl px-6 py-5 my-6 shadow-md">
@@ -82,4 +99,26 @@ export default function ProfilePage() {
 			<div className="h-6" />
 		</div>
 	);
+}
+
+function Web() {
+	const { isAuthenticated, session } = useDevice();
+
+	return (
+		<main className="flex flex-col row-start-2 items-center mt-10">
+			<h1 className="text-3xl sm:text-4xl font-bold tracking-[-.01em] text-center sm:text-left text-white">
+				{isAuthenticated ? `Welcome, ${session.username} !!` : ""}
+			</h1>
+			<span className="text-white">
+				Use the mobile app for a better experience!
+			</span>
+		</main>
+	);
+}
+
+
+export default function ProfilePage() {
+	const { isMobile, isSafari } = useDevice();
+	if (isMobile && isSafari) return Mobile();
+	else return Mobile();
 }
