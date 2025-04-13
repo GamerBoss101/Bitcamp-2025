@@ -68,8 +68,7 @@ export async function POST(req: Request) {
 
 		let requests = formData.get("requests");
 		if(requests) {
-			if(!Array.isArray(requests)) return NextResponse.json({ message: "Invalid requests data" }, { status: 400 });
-			userData = await db.users.update(userData.id, { requests });
+			userData = await db.users.update(userData.id, { requests: JSON.parse(requests.toString()) });
 			if (!userData) return NextResponse.json({ message: "Failed to update requests" }, { status: 500 });
 		}
         

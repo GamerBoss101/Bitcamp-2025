@@ -121,7 +121,7 @@ function Mobile() {
 			"requests",
 			JSON.stringify(requests.filter((req: string) => req !== request))
 		);
-		fetch(`/api/user/${session?.id}`, {
+		fetch(`/api/me`, {
 			method: "POST",
 			body: formData,
 		})
