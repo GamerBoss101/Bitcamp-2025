@@ -72,7 +72,8 @@ export class User {
     }
 
     async update(Id: string, data: any) {
-        return await this.model.updateOne({ id: Id }, { $set: data }, this.upsert);
+        await this.model.updateOne({ id: Id }, { $set: data }, this.upsert);
+        return await this.model.findOne({ id: Id });
     }
 
     async delete(Id: string) {

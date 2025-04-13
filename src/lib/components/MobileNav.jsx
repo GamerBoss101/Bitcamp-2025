@@ -6,7 +6,8 @@ import {
     Home as IconHome,
     BookText as BookImage,
     User as UserImage,
-    Plus as PlusImage
+    Plus as PlusImage,
+    ShoppingCart as ShoppingCartImage,
 } from "lucide-react";
 
 import { useDevice } from "@/lib/context/DeviceContext";
@@ -26,6 +27,11 @@ const MobileNav = () => {
                 {isAuthenticated ? (
                    <Navigation.Tile label="Post" href="/posts" className="flex flex-col items-center">
                         <PlusImage />
+                    </Navigation.Tile>
+                ) : null}
+                {isAuthenticated ? (
+                   <Navigation.Tile label="Shop" href="/shop" className="flex flex-col items-center">
+                        <ShoppingCartImage />
                     </Navigation.Tile>
                 ) : null}
                 {isAuthenticated ? (

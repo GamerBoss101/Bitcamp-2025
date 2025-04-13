@@ -6,28 +6,40 @@ import { useDevice } from "@/lib/context/DeviceContext";
 function Mobile() {
 	const { isAuthenticated, session } = useDevice();
 	const [bio, setBio] = useState(session?.bio || "");
+	const [username, setUsername] = useState(session?.username || "");
 
 	useEffect(() => {
 		if (session) {
 			setBio(session.bio || "");
+			setUsername(session.username || "");
 		}
 	}, [session]);
 
 	function handleSubmit(e: React.FormEvent) {
 		e.preventDefault();
-		if (bio.length > 0) {
+		if (bio.length > 0 || username.length > 0) {
 			const formData = new FormData();
-			formData.append("bio", bio);
+			if (bio.length > 0) formData.append("bio", bio);
+			if (username.length > 0) formData.append("username", username);
 
 			fetch("/api/me", {
 				method: "POST",
 				body: formData, // Automatically sets Content-Type to multipart/form-data
-			});
-
-			// Show a success message
-			alert("Bio saved!");
+			})
+				.then((res) => res.json())
+				.then((data) => {
+					if (data.message === "User updated successfully") {
+						alert("Profile updated successfully!");
+					} else {
+						alert("Failed to update profile.");
+					}
+				})
+				.catch((err) => {
+					console.error("Error updating profile:", err);
+					alert("An error occurred while updating your profile.");
+				});
 		} else {
-			alert("Please enter a bio.");
+			alert("Please enter a bio or username.");
 		}
 	}
 
@@ -35,7 +47,7 @@ function Mobile() {
 		<div className="px-6 py-10 max-w-full lg:max-w-1/2 mx-auto font-sans text-neutral-100">
 			<div className="bg-[color:var(--color-surface-600)]/70 backdrop-blur-md rounded-xl px-6 py-5 my-6 shadow-sm">
 				<h1 className="text-2xl sm:text-3xl font-bold tracking-[-.01em] text-center">
-					Hi, {session?.username || ""}!!
+					Hi, {username || ""}!!
 				</h1>
 
 				<div className="flex flex-col items-center mt-6 my-4">
@@ -46,12 +58,19 @@ function Mobile() {
 							className="w-42 h-42 rounded-full object-cover bg-surface-700"
 						/>
 					)}
-					{/* {uploadMessage && (
-						<p className="text-sm text-gray-400 mt-2">{uploadMessage}</p>
-					)} */}
 				</div>
 
-				<form onSubmit={handleSubmit} className="mb-6 space-y-2">
+				<form onSubmit={handleSubmit} className="mb-6 space-y-4">
+					{/* Username Input */}
+					<input
+						type="text"
+						className="w-full p-2 rounded bg-neutral-800 text-white"
+						onChange={(e) => setUsername(e.target.value)}
+						value={username || ""}
+						placeholder="Update your username..."
+					/>
+
+					{/* Bio Input */}
 					<textarea
 						className="w-full p-2 rounded bg-neutral-800 text-white"
 						onChange={(e) => setBio(e.target.value)}
@@ -59,11 +78,13 @@ function Mobile() {
 						placeholder="Update your bio..."
 						rows={3}
 					/>
+
+					{/* Submit Button */}
 					<button
 						type="submit"
 						className="w-full px-4 py-2 bg-success-600 text-white rounded"
 					>
-						Save Bio
+						Save Profile
 					</button>
 				</form>
 			</div>
