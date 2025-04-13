@@ -140,11 +140,15 @@ function Mobile() {
 
 	function handleRemoveFriend(friendCode: string) {
 		// Remove the friend from the friends array and update the state
-		setFriends((prev: string[]) => prev.filter((friend) => friend !== friendCode));
-
+		setFriends((prev: string[]) =>
+			prev.filter((friend) => friend !== friendCode)
+		);
 
 		const formData = new FormData();
-		formData.append("friends", JSON.stringify(friends.filter((friend: string) => friend !== friendCode)));
+		formData.append(
+			"friends",
+			JSON.stringify(friends.filter((friend: string) => friend !== friendCode))
+		);
 
 		// Update the user's friends in the database
 		fetch(`/api/me`, {
@@ -210,7 +214,7 @@ function Mobile() {
 				</form>
 			</div>
 
-			 {/* Points and Cosmetics Owned */}
+			{/* Points and Cosmetics Owned */}
 			<div className="bg-[color:var(--color-surface-800)] rounded-xl px-6 py-5 my-6 shadow-md">
 				<h2 className="text-3xl font-bold tracking-[-.01em] text-[color:var(--color-warning-300)] mb-4">
 					Points & Cosmetics
@@ -252,7 +256,11 @@ function Mobile() {
 					<ul className="list-none space-y-4">
 						{friends.length > 0 ? (
 							friends.map((friendCode: string, index: number) => (
-								<Friend key={index} friendCode={friendCode} onRemove={handleRemoveFriend} />
+								<Friend
+									key={index}
+									friendCode={friendCode}
+									onRemove={handleRemoveFriend}
+								/>
 							))
 						) : (
 							<p className="text-neutral-400">No friends yet.</p>
@@ -303,6 +311,10 @@ function Mobile() {
 					</form>
 				</div>
 			</div>
+
+			<button type="button" className="btn bg-surface-800 w-full">
+				<a href="/auth/logout">Logout</a>
+			</button>
 		</div>
 	);
 }
