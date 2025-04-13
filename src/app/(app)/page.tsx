@@ -110,8 +110,8 @@ function Mobile() {
                     </button>
                 </div>
             ) : (
-                <div className="w-full px-6">
-                    <div className="bg-[color:var(--color-surface-800)] rounded-xl px-6 py-5 shadow-md">
+                <div className="w-full px-2">
+                    <div className="bg-[color:var(--color-surface-800)] rounded-xl px-4 py-5 shadow-md">
                         <h2 className="text-2xl font-bold text-center text-[color:var(--color-warning-300)] mb-4">
                             Activity Feed
                         </h2>

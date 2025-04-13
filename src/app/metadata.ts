@@ -24,4 +24,8 @@ export const metadata: Metadata = {
             },
         ],
     },
+    icons: {
+        icon: "/cappylogosmall.png", // Default icon for the app
+        apple: "/cappylogosmall.png", // Apple-specific icon
+    },
 };
