@@ -46,31 +46,31 @@ function calculatePoints(description: string): number {
 
     // Points calculation based on the description
     if (normalizedDescription.includes("water")) {
-        points += 100; // Base points for water
-        if (normalizedDescription.includes("≥64oz") || normalizedDescription.includes("64oz or more")) {
-            points += 15; // Bonus for drinking ≥64oz of water
+        points += 50; // Reduced base points for water
+        if (normalizedDescription.includes("≥100oz") || normalizedDescription.includes("100oz or more")) {
+            points += 10; // Bonus for drinking ≥100oz of water
         }
     } else if (normalizedDescription.includes("coffee")) {
-        points += 50; // Base points for coffee
-        if (normalizedDescription.includes("≥400mg caffeine") || normalizedDescription.includes("exceeds caffeine")) {
-            points = 0; // No points if caffeine exceeds 400mg
+        points += 25; // Reduced base points for coffee
+        if (normalizedDescription.includes("≥300mg caffeine") || normalizedDescription.includes("exceeds caffeine")) {
+            points = 0; // No points if caffeine exceeds 300mg
         }
     } else if (normalizedDescription.includes("tea")) {
-        points += 50; // Base points for tea
-        if (normalizedDescription.includes("≥400mg caffeine") || normalizedDescription.includes("exceeds caffeine")) {
-            points = 0; // No points if caffeine exceeds 400mg
+        points += 25; // Reduced base points for tea
+        if (normalizedDescription.includes("≥300mg caffeine") || normalizedDescription.includes("exceeds caffeine")) {
+            points = 0; // No points if caffeine exceeds 300mg
         }
     } else if (normalizedDescription.includes("coca-cola")) {
         points = 0; // No points for Coca-Cola due to sugar
     } else if (normalizedDescription.includes("fruit juice")) {
-        points += 50; // Base points for fruit juice
-        if (normalizedDescription.includes("≥30.5g sugar") || normalizedDescription.includes("exceeds sugar")) {
-            points = 0; // No points if sugar exceeds 30.5g
+        points += 25; // Reduced base points for fruit juice
+        if (normalizedDescription.includes("≥20g sugar") || normalizedDescription.includes("exceeds sugar")) {
+            points = 0; // No points if sugar exceeds 20g
         }
     } else if (normalizedDescription.includes("milk")) {
-        points += 50; // Base points for milk
+        points += 25; // Reduced base points for milk
         if (normalizedDescription.includes("low-fat")) {
-            points += 0.5; // Bonus for low-fat milk
+            points += 0.25; // Reduced bonus for low-fat milk
         }
     }
 
