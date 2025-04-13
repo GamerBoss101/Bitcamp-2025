@@ -71,7 +71,6 @@ function Mobile() {
 			.then((data) => {
 				if (data.message === "Friend request sent successfully") {
 					alert("Friend request sent!");
-					setRequests((prev: any) => [...prev, friendCode]);
 					setFriendCode(""); // Clear the input field
 				} else {
 					alert(data.message || "Failed to send friend request.");
