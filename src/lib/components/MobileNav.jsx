@@ -5,14 +5,12 @@ import { Navigation } from "@skeletonlabs/skeleton-react";
 import {
     Home as IconHome,
     BookText as BookImage,
-    Coins as CoinsImage,
     User as UserImage,
 } from "lucide-react";
 
 import { useDevice } from "@/lib/context/DeviceContext";
 
 const MobileNav = () => {
-
     const { isAuthenticated } = useDevice();
 
     return (

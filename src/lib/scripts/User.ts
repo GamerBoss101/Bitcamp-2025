@@ -9,7 +9,8 @@ const userSchema = new mongoose.Schema({
 	id: reqString,
 	email: reqString,
 	username: reqString,
-    avatar: String,
+    bio: String,
+    avatar: Number,
 	points: Number,
 	inventory: Array,
 	friends: Array<String>,
@@ -39,11 +40,15 @@ export class User {
 		username: string
 	) {
         const id = this.makeId(5);
+
+        // random number from 1 to 5
+        const randomNumber = Math.floor(Math.random() * 5) + 1;
+
 		const newEntry = new this.model({
             id: id,
 			email: email,
 			username: username,
-            avatar: null,
+            avatar: randomNumber,
             points: 0,
             inventory: [],
             friends: [],

@@ -1,64 +1,34 @@
 "use client";
 
-// const useDevice = () => ({
-//   isAuthenticated: true,
-//   session: { username: "demo_user" },
-// });
-
+import React from "react";
 import { useDevice } from "@/lib/context/DeviceContext";
-import React, { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function ProfilePage() {
 	const { isAuthenticated, session } = useDevice();
-	const [bio, setBio] = useState("");
-	const [saved, setSaved] = useState(false);
-
-	const [selectedFile, setSelectedFile] = useState<File | null>(null);
-	const [previewUrl, setPreviewUrl] = useState<string | null>(null);
-	const [uploadMessage, setUploadMessage] = useState<string>("");
-
-	useEffect(() => {
-		if (isAuthenticated && session?.username) {
-			fetch(`/api/user/${session.username}`)
-				.then((res) => res.json())
-				.then((data) => {
-					if (data.bio) setBio(data.bio);
-				});
-		}
-	}, [isAuthenticated, session?.username]);
-
-	const handleBioSubmit = async (e: React.FormEvent) => {
-		e.preventDefault();
-		const res = await fetch(`/api/user/${session.username}/bio`, {
-			method: "PATCH",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({ bio }),
-		});
-		if (res.ok) setSaved(true);
-	};
 
 	return (
 		<div className="px-6 py-10 max-w-full lg:max-w-1/2 mx-auto font-sans text-neutral-100">
 			<div className="bg-[color:var(--color-surface-600)]/70 backdrop-blur-md rounded-xl px-6 py-5 my-6 shadow-sm">
-				<h1 className="text-3xl sm:text-4xl font-bold tracking-[-.01em] text-center sm:text-left">
-					Hi, {isAuthenticated ? session.username : ""}!!
+				<h1 className="text-2xl sm:text-3xl font-bold tracking-[-.01em] text-center sm:text-left">
+					Hi, {session?.username || ""}!!
 				</h1>
 
 				<div className="flex flex-col items-center mt-6">
-					{previewUrl ? (
+					{isAuthenticated && (
 						<img
-							src={previewUrl}
+							src={"/p" + session?.avatar + ".png"}
 							alt="Profile Preview"
-							className="w-32 h-32 rounded-full object-cover border border-gray-300"
+							className="w-42 h-42 rounded-full object-cover bg-surface-700"
 						/>
-					) : (
-						<div className="w-32 h-32 rounded-full bg-neutral-800 border border-gray-300" />
 					)}
-					{uploadMessage && <p className="text-sm text-gray-400 mt-2">{uploadMessage}</p>}
+					{/* {uploadMessage && (
+						<p className="text-sm text-gray-400 mt-2">{uploadMessage}</p>
+					)} */}
 				</div>
 			</div>
 
-			<p className="mb-6">{bio || "No bio yet..."}</p>
+			{/* <p className="mb-6">{bio || "No bio yet..."}</p>
 
 			<form onSubmit={handleBioSubmit} className="mb-6 space-y-2">
 				<textarea
@@ -75,7 +45,7 @@ export default function ProfilePage() {
 					Save Bio
 				</button>
 				{saved && <p className="text-green-400 text-sm">Bio saved!</p>}
-			</form>
+			</form> */}
 
 			{/* Friends */}
 			<div className="bg-[color:var(--color-surface-600)] rounded-xl px-6 py-5 my-6 shadow-md">
@@ -96,7 +66,7 @@ export default function ProfilePage() {
 			{/* Daily Stats */}
 			<div className="bg-[color:var(--color-surface-600)]/70 backdrop-blur-md rounded-xl px-6 py-5 my-6 shadow-sm">
 				<h2 className="text-xl font-semibold text-[color:var(--color-warning-300)] mt-0 mb-2">
-					 --------------------Daily Stats---------------------
+					--------------------Daily Stats---------------------
 				</h2>
 				<ul className="list-disc pl-5 text-neutral-200 space-y-1">
 					<li>Points Logged: [ dailyPoints variable ]</li>
@@ -104,8 +74,8 @@ export default function ProfilePage() {
 					<li>Sugar Logged (g): [ daily sugar variable ]</li>
 				</ul>
 				<p className="font-semibold italic text-[color:var(--color-success-300)] mt-1">
-                    Don't forget you have a 400mg caffeine limit and 30.5g sugar limit!
-                </p>
+					Don't forget you have a 400mg caffeine limit and 30.5g sugar limit!
+				</p>
 			</div>
 
 			<div className="h-6" />
