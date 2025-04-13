@@ -21,7 +21,9 @@ async function authenticateUser() {
 
 export async function POST(req: Request) {
 	try {
-		// if (!(await authenticateUser())) return;
+
+		let userData = await authenticateUser();
+		if (!userData) return NextResponse.json({ message: "User not found" }, { status: 404 });
 
 		const formData = await req.formData();
 		const file = formData.get("image");
@@ -39,7 +41,14 @@ export async function POST(req: Request) {
 		const prompt = `Generate a 1-3 sentence description for this image.`;
 
 		const data = await gemini.generateDescription(prompt, buffer);
-		let postData = await db.posts.create("6gi1f", data?.description);
+		let postData = await db.posts.create(userData.id, data?.description, buffer);
+
+		if (!postData) {
+			return NextResponse.json(
+				{ message: "Failed to create post" },
+				{ status: 500 }
+			);
+		}
 
 		return NextResponse.json(
 			{ message: "Image uploaded successfully", postData },

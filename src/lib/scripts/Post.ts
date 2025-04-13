@@ -11,6 +11,7 @@ const postSchema = new mongoose.Schema({
     timeStamp: Date,
     reactions: Array,
     userId: reqString,
+    image: Buffer
 });
 
 export class Post {
@@ -31,13 +32,14 @@ export class Post {
         return result.join('');
     }
 
-    async create(userId:string, imageDes: string) {
+    async create(userId:string, imageDes: string, image: Buffer) {
         const newEntry = new this.model({
             id: this.makeId(5),
             imageDes: imageDes,
             timeStamp: new Date().toISOString(),
             reactions: [],
-            userId: userId
+            userId: userId, 
+            image
         });
         await newEntry.save();
         return newEntry;
