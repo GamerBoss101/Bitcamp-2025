@@ -44,7 +44,7 @@ function Mobile() {
 	}
 
 	return (
-		<div className="px-6 py-10 max-w-full lg:max-w-1/2 mx-auto font-sans text-neutral-100">
+		<div className="px-6 py-10 my-10 max-w-full lg:max-w-1/2 mx-auto font-sans text-neutral-100">
 			<div className="bg-[color:var(--color-surface-600)]/70 backdrop-blur-md rounded-xl px-6 py-5 my-6 shadow-sm">
 				<h1 className="text-2xl sm:text-3xl font-bold tracking-[-.01em] text-center">
 					Hi, {username || ""}!!
@@ -118,6 +118,11 @@ function Mobile() {
 				<p className="font-semibold italic text-[color:var(--color-success-300)] mt-1">
 					Don't forget you have a 400mg caffeine limit and 30.5g sugar limit!
 				</p>
+			</div>
+			<div>
+				<button type="button" className="btn bg-surface-800 w-full">
+					<a href="/auth/logout">Logout</a>
+				</button>
 			</div>
 		</div>
 	);
