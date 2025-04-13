@@ -201,7 +201,6 @@ export default function PostsPage() {
                                 allowReactions={false}
                                 key={index}
                                 post={post}
-                                userReactions={userReactions[index] || { liked: false, warned: false }}
                                 onLike={() => handleLike(index)}
                                 onWarning={() => handleWarning(index)}
                                 onDelete={() => handleDelete(index)} // Pass the delete handler

@@ -1,23 +1,25 @@
 import type { MetadataRoute } from "next";
 
-
-
 export default function manifest(): MetadataRoute.Manifest {
-	return {
-		name: "Healthify",
-		short_name: "Healthify",
-		description:
-			"Healthy APP",
-		start_url: "/",
-		display: "standalone",
-		background_color: "#000000",
-		theme_color: "#000000",
-		icons: [
-			{
-				src: "/vercel.svg",
-				sizes: "192x192",
-				type: "image/svg",
-			},
-		],
-	};
+    return {
+        name: "Drink Happy",
+        short_name: "Drink Happy",
+        description: "Track your drinks, earn points, and improve your health with Drink Happy!",
+        start_url: "/",
+        display: "standalone",
+        background_color: "#1E293B", // Matches the app's dark theme
+        theme_color: "#1E293B", // Matches the app's dark theme
+        icons: [
+            {
+                src: "/cappylogosmall.png",
+                sizes: "192x192",
+                type: "image/png",
+            },
+            {
+                src: "/cappylogosmall.png",
+                sizes: "512x512",
+                type: "image/png",
+            },
+        ],
+    };
 }

@@ -14,7 +14,6 @@ interface PostProps {
     onLike: () => void;
     onWarning: () => void;
     onDelete: () => void; // Callback for deleting the post
-    userReactions: { liked: boolean; warned: boolean };
     allowReactions: boolean; // New property to toggle reactions
 }
 
@@ -23,10 +22,12 @@ export default function Post({
     onLike,
     onWarning,
     onDelete,
-    userReactions,
     allowReactions,
 }: PostProps) {
-    const [userData, setUserData] = useState<{ username: string; avatar: number } | null>({username: "Loading...", avatar: 1});
+    const [userData, setUserData] = useState<{ username: string; avatar: number } | null>({
+        username: "Loading...",
+        avatar: 1,
+    });
 
     useEffect(() => {
         // Fetch the username and avatar based on the userId
@@ -89,30 +90,28 @@ export default function Post({
 
             {/* Post Actions */}
             <div className="flex gap-4 items-center">
-                {allowReactions && (
-                    <>
-                        <button
-                            onClick={onLike}
-                            className={`px-3 py-1 rounded text-sm ${
-                                userReactions.liked
-                                    ? "bg-success-800"
-                                    : "bg-success-600 hover:bg-primary-600"
-                            } text-white`}
-                        >
-                            👍 Like ({post.reactions.filter((reaction) => reaction.liked).length})
-                        </button>
-                        <button
-                            onClick={onWarning}
-                            className={`px-3 py-1 rounded text-sm ${
-                                userReactions.warned
-                                    ? "bg-red-800"
-                                    : "bg-primary-500 hover:bg-red-600"
-                            } text-white`}
-                        >
-                            😭 Stop drinking that ({post.reactions.filter((reaction) => reaction.warned).length})
-                        </button>
-                    </>
-                )}
+                <button
+                    onClick={onLike}
+                    disabled={!allowReactions} // Disable button if allowReactions is false
+                    className={`px-3 py-1 rounded text-sm ${
+                        allowReactions
+                            ? "bg-success-600 hover:bg-primary-600 text-white"
+                            : "bg-gray-500 text-gray-300 cursor-not-allowed"
+                    }`}
+                >
+                    👍 Like ({post.reactions.filter((reaction) => reaction.liked).length})
+                </button>
+                <button
+                    onClick={onWarning}
+                    disabled={!allowReactions} // Disable button if allowReactions is false
+                    className={`px-3 py-1 rounded text-sm ${
+                        allowReactions
+                            ? "bg-primary-500 hover:bg-red-600 text-white"
+                            : "bg-gray-500 text-gray-300 cursor-not-allowed"
+                    }`}
+                >
+                    😭 Stop drinking that ({post.reactions.filter((reaction) => reaction.warned).length})
+                </button>
                 <button
                     onClick={onDelete}
                     className="px-3 py-1 rounded text-sm bg-red-600 hover:bg-red-700 text-white"
