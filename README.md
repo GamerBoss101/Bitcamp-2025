@@ -1,36 +1,57 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Drink Happy - Health Check & Game
 
-## Getting Started
+Drink Happy is a fun and engaging web application designed to help users track their drink choices, earn points, and improve their health. By making informed beverage decisions, users can stay hydrated, maintain a healthy lifestyle, and compete with friends for the highest score!
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### 🎮 Gamified Drink Tracking
+- Earn points for healthy drink choices.
+- Lose points for exceeding caffeine or sugar limits.
+- View a detailed **Points Guide** to understand how points are calculated.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 🏆 Activity Feed
+- See your friends' drink posts in a real-time activity feed.
+- React to posts with likes or warnings.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 📸 Post Your Drinks
+- Upload images of your drinks and get AI-generated descriptions.
+- Earn points based on the drink's healthiness.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 👥 Social Features
+- Add friends using unique friend codes.
+- Send and accept friend requests.
+- View and manage your friends list.
 
-## Learn More
+### 🛍️ Shop for Avatars
+- Use your points to purchase new profile pictures.
+- Customize your profile with unique avatars.
 
-To learn more about Next.js, take a look at the following resources:
+### 📱 Mobile-Friendly
+- Optimized for mobile devices with a responsive design.
+- Includes a background music toggle for Safari users.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## How It Works
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. **Track Your Drinks**: Upload a photo of your drink, and the app will generate a description and calculate points based on its healthiness.
+2. **Compete with Friends**: Add friends and view their drink posts in the activity feed. React to their posts and climb the leaderboard!
+3. **Earn Rewards**: Use your points to unlock new avatars and customize your profile.
 
-## Deploy on Vercel
+## Points System
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The app uses a gamified scoring system to encourage healthy drink choices:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+| Drink                | Volume (oz) | Caffeine (mg) | Sugar (g) | Points Earned | Bonus Conditions                  |
+|----------------------|-------------|---------------|-----------|---------------|-----------------------------------|
+| Water               | 8           | n/a           | n/a       | 50            | +10 for ≥100oz in a day           |
+| Coffee              | 8           | 95            | n/a       | 25            | 0 points after 300mg caffeine     |
+| Tea                 | 8           | 55            | n/a       | 25            | 0 points after 300mg caffeine     |
+| Coca-Cola           | 8           | 34            | 39        | 0             | Exceeds sugar limit               |
+| 100% Fruit Juice    | 8           | 0             | 22        | 25            | 0 points after 20g sugar          |
+| Dairy Milk (low-fat)| 8           | 0             | 12        | 25            | +0.25 calcium bonus for low-fat   |
+
+## Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-repo/drink-happy.git
+   cd drink-happy
