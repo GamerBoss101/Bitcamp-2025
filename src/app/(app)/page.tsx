@@ -136,6 +136,9 @@ function Mobile() {
 }
 
 function Web() {
+
+    const { isAuthenticated, session } = useDevice();
+
 	return (
 		<main className="flex flex-col gap-[32px] my-20 row-start-2 items-center mt-10 text-white">
 			<img
@@ -144,7 +147,7 @@ function Web() {
 				className="h-auto mx-auto my-auto w-3/4 lg:w-1/3"
 			/>
 			<h1 className="text-3xl sm:text-4xl font-bold tracking-[-.01em] text-center sm:text-left">
-				Welcome to Drink Happy!
+                {isAuthenticated ? `Welcome, ${session.username} !!` : ""}
 			</h1>
 		</main>
 	);
