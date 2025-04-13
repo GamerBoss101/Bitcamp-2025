@@ -8,8 +8,24 @@ function Mobile() {
 	return (
 		<main className="flex flex-col gap-[32px] row-start-2 items-center mt-10">
 			<h1 className="text-3xl sm:text-4xl font-bold tracking-[-.01em] text-center sm:text-left">
-			 	{isAuthenticated ? `Welcome, ${session.username} !!` : ""}
+				{isAuthenticated ? `Welcome, ${session.username} !!` : ""}
 			</h1>
+			{isAuthenticated ? (
+				<div>
+					<button type="button" className="btn bg-surface-500">
+						<a href="/auth/logout">Logout</a>
+					</button>
+				</div>
+			) : (
+				<div className="flex gap-4">
+					<button type="button" className="btn bg-surface-500">
+						<a href="/auth/login?screen_hint=signup">Sign up</a>
+					</button>
+					<button type="button" className="btn bg-surface-500">
+						<a href="/auth/login?screen_hint=login">Log in</a>
+					</button>
+				</div>
+			)}
 		</main>
 	);
 }
