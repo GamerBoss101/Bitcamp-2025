@@ -57,25 +57,27 @@ const PointGuide = () => {
 
     return (
 		<div>
-			<h1 className="text-2xl sm:text-3xl font-bold mb-4 text-white">
-  				Points Guide
-			</h1>
-			<p className="mb-6 text-sm sm:text-base text-white">
-  					Learn how many points you receive for each drink!
-			</p>
+			<div className="bg-[color:var(--color-success-600)]/60 backdrop-blur-md rounded-xl px-6 py-5 my-6 shadow-sm">
+				<h1 className="text-2xl sm:text-3xl font-bold mb-4 text-white">
+					Points Guide
+				</h1>
+				<p className="mb-6 text-sm sm:text-base text-white">
+					Learn how many points you receive for each drink!
+				</p>
 
-			<ul>
-				<span className="text-base sm:text-lg">Game Points System:</span>
-				<ul className="list-disc pl-5 mt-1 space-y-1 text-sm sm:text-base">
-					<li> +150 points for drinking ≥100 oz of water </li>
-					<li> +100 points for keeping caffeine &lt; 200 mg </li>
-					<li> +150 points for staying under the sugar cap all day </li>
+				<div>
+					<span className="text-base sm:text-lg text-white">Game Points System:</span>
+					<ul className="list-disc pl-5 mt-1 space-y-1 text-sm sm:text-base text-white">
+					<li>+150 points for drinking ≥100 oz of water</li>
+					<li>+100 points for keeping caffeine &lt; 200 mg</li>
+					<li>+150 points for staying under the sugar cap all day</li>
 					<li>
 						Exceeding 400mg caffeine limit or 30.5g sugar limit = 0 pts logged for
 						those drinks
 					</li>
-				</ul>
-			</ul>
+					</ul>
+				</div>
+			</div>
 
 			<div className="bg-surface-700 rounded-xl px-4 py-4 my-6 shadow-sm">
 				<div className="overflow-x-auto rounded-xl scroll-auto">

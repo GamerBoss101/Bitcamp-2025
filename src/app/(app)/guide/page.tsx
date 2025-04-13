@@ -14,8 +14,8 @@ export default function InfoPage() {
                 <button
                     className={`px-4 py-2 rounded ${
                         activeComponent === "info"
-                            ? "bg-primary-500 text-white"
-                            : "bg-secondary-700 text-gray-300"
+                            ? "bg-success-500 text-white"
+                            : "bg-surface-700 text-gray-300"
                     }`}
                     onClick={() => setActiveComponent("info")}
                 >
@@ -24,8 +24,8 @@ export default function InfoPage() {
                 <button
                     className={`px-4 py-2 rounded ${
                         activeComponent === "points"
-                            ? "bg-primary-500 text-white"
-                            : "bg-secondary-700 text-gray-300"
+                            ? "bg-success-500 text-white"
+                            : "bg-surface-700 text-gray-300"
                     }`}
                     onClick={() => setActiveComponent("points")}
                 >

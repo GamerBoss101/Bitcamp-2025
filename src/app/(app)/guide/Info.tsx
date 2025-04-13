@@ -6,15 +6,17 @@ const InfoContent = () => {
 
     return (
         <div>
-            <h1 className="text-3xl dark:text-3xl font-bold mb-4">
-                Beverage Consumption Info!
-            </h1>
-            <p className="mb-6 ">
-                Learn what's best for your body and how to earn points and win! Making
-                informed drink choices supports hydration, energy regulation, and
-                overall health. Below are basic guidelines based on established public
-                health recommendations.
-            </p>
+            <div className="bg-[color:var(--color-success-600)]/60 backdrop-blur-md rounded-xl px-6 py-5 my-6 shadow-sm">
+                <h1 className="text-3xl dark:text-3xl font-bold mb-4">
+                    Beverage Consumption Info!
+                </h1>
+                <p className="mb-6 ">
+                    Learn what's best for your body and how to earn points and win! Making
+                    informed drink choices supports hydration, energy regulation, and
+                    overall health. Below are basic guidelines based on established public
+                    health recommendations.
+                </p>
+            </div>
 
             <div className="bg-[color:var(--color-surface-600)] rounded-xl px-6 py-5 my-6 shadow-sm">
                 <h2 className="text-2xl font-semibold mt-0 mb-2 text-[color:var(--color-warning-300)]">
