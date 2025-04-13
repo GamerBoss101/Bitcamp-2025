@@ -9,7 +9,9 @@ import {
     User as UserImage,
 } from "lucide-react";
 
-const Footer = () => {
+import { useDevice } from "@/lib/context/DeviceContext";
+
+const MobileNav = () => {
 
     const { isAuthenticated } = useDevice();
 
@@ -35,4 +37,4 @@ const Footer = () => {
     );
 };
 
-export default Footer;
+export default MobileNav;
