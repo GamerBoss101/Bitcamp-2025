@@ -8,7 +8,7 @@ export async function GET() {
 		const session = await auth0.getSession();
 
 		if (!session) {
-			return NextResponse.json({ session: null }, { status: 401 });
+			return NextResponse.json({ session: null }, { status: 200 });
 		}
 
 		const sessionUser = session.user;
@@ -17,8 +17,6 @@ export async function GET() {
 		if (!userData) {
 			console.log("User not found in database, creating new user...");
 			userData = await db.users.create(sessionUser?.email as string, sessionUser?.nickname as string);
-		} else {
-			console.log("User found in database:", userData);
 		}
 
 		return NextResponse.json({ session: userData });

@@ -16,7 +16,7 @@ export default function RootLayout({
 		<main className="max-h-screen max-w-screen bg-img overflow-hidden" suppressHydrationWarning={true}>
 			{!isMobile && !isSafari ? <NavBar /> : null}
 			<section className="space-x-2 gap-4 flex flex-col overflow-y-auto h-screen p-4 lg:p-6 lg:rounded-xl lg:shadow-sm">
-				<img src="/drinkhappylogo.png" alt="Drink Happy Logo Image" className="h-auto mx-auto w-3/4 lg:w-1/4" />
+				<img src="/drinkhappylogo.png" alt="Drink Happy Logo Image" className="h-auto mx-auto w-3/4 lg:w-2/3" />
 				{children}
 			</section>
 			{isMobile && isSafari ? (

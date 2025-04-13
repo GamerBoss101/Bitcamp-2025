@@ -27,11 +27,7 @@ export const DeviceProvider: React.FC<{ children: React.ReactNode }> = ({ childr
             const res = await fetch("/auth/session");
             const data = await res.json();
 
-            if (res.ok) {
-                setSession(data.session);
-            } else {
-                console.error("Error fetching session:", data);
-            }
+            if (res.ok) setSession(data.session);
         };
 
         checkAuthentication();
