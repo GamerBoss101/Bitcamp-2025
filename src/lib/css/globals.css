@@ -19,3 +19,13 @@
 body {
 	font-family: Arial, Helvetica, sans-serif;
 }
+
+.bg-img {
+	/* Repeat Background Image on the y axis */
+	background-repeat: repeat-y;
+
+	background-size: cover;
+	background-position: center;
+	height: 100vh;
+	@apply dark:bg-[url('/darkmodebackground.png')] bg-[url('/lightmodebackground.png')];
+}

@@ -13,9 +13,9 @@ export default function RootLayout({
 }>) {
 	const { isMobile, isSafari } = useDevice();
 	return (
-		<main suppressHydrationWarning={true}>
+		<main className="max-h-screen max-w-screen bg-img overflow-hidden" suppressHydrationWarning={true}>
 			{!isMobile && !isSafari ? <NavBar /> : null}
-			<section className="min-h-screen max-w-screen space-x-2 gap-4 flex flex-col">
+			<section className="space-x-2 gap-4 flex flex-col overflow-y-auto h-screen p-4 lg:p-6 lg:rounded-xl lg:shadow-sm">
 				<img src="/drinkhappylogo.png" alt="Drink Happy Logo Image" className="h-auto mx-auto w-3/4 lg:w-1/4" />
 				{children}
 			</section>

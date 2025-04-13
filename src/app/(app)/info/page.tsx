@@ -3,10 +3,10 @@
 export default function InfoPage() {
 	return (
 		<div className="px-6 py-10 max-w-full lg:max-w-1/2 mx-auto font-sans text-neutral-100">
-			<h1 className="text-3xl font-bold mb-4 text-[color:var(--color-warning-600)] dark:text-3xl font-bold mb-4 text-[color:var(--color-warning-300)]">
+			<h1 className="text-3xl dark:text-3xl font-bold mb-4">
 				Beverage Consumption Info!
 			</h1>
-			<p className="text-neutral-500 dark: mb-6 text-neutral-300">
+			<p className="mb-6 ">
 				Learn what's best for your body and how to earn points and win! Making
 				informed drink choices supports hydration, energy regulation, and
 				overall health. Below are basic guidelines based on established public
