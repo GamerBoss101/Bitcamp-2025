@@ -103,6 +103,9 @@ export default function ProfilePage() {
 					<li>Caffeine Logged (mg): [ daily caffeine variable ]</li>
 					<li>Sugar Logged (g): [ daily sugar variable ]</li>
 				</ul>
+				<p className="font-semibold italic text-[color:var(--color-success-300)] mt-1">
+                    Don't forget you have a 400mg caffeine limit and 30.5g sugar limit!
+                </p>
 			</div>
 
 			<div className="h-6" />
