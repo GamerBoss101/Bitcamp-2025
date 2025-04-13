@@ -47,6 +47,15 @@ export async function POST(req: Request) {
 			userData = await db.users.update(userData.id, { inventory: inventoryData });
 			if (!userData) return NextResponse.json({ message: "Failed to update inventory" }, { status: 500 });
 		}
+
+		let friends = formData.get("friends");
+		if(friends) {
+			let friendsData = userData.friends;
+			if (!friendsData) friendsData = [];
+			friendsData.push(friends.toString());
+			userData = await db.users.update(userData.id, { friends: friendsData });
+			if (!userData) return NextResponse.json({ message: "Failed to update friends" }, { status: 500 });
+		}
         
         return NextResponse.json({ message: "User updated successfully", user: userData }, { status: 200 });
 	} catch (error) {
