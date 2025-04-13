@@ -5,10 +5,15 @@ import { useDevice } from "@/lib/context/DeviceContext";
 
 function Mobile() {
 	const { isAuthenticated, session } = useDevice();
+	const [bio, setBio] = useState(session?.bio || "");
 
-	const [bio, setBio] = useState("");
+	useEffect(() => {
+		if (session) {
+			setBio(session.bio || "");
+		}
+	}, [session]);
 
-	function handleBioSubmit(e: React.FormEvent) {
+	function handleSubmit(e: React.FormEvent) {
 		e.preventDefault();
 		if (bio.length > 0) {
 			const formData = new FormData();
@@ -29,11 +34,11 @@ function Mobile() {
 	return (
 		<div className="px-6 py-10 max-w-full lg:max-w-1/2 mx-auto font-sans text-neutral-100">
 			<div className="bg-[color:var(--color-surface-600)]/70 backdrop-blur-md rounded-xl px-6 py-5 my-6 shadow-sm">
-				<h1 className="text-2xl sm:text-3xl font-bold tracking-[-.01em] text-center sm:text-left">
+				<h1 className="text-2xl sm:text-3xl font-bold tracking-[-.01em] text-center">
 					Hi, {session?.username || ""}!!
 				</h1>
 
-				<div className="flex flex-col items-center mt-6">
+				<div className="flex flex-col items-center mt-6 my-4">
 					{isAuthenticated && (
 						<img
 							src={"/avatar/p" + session?.avatar + ".png"}
@@ -45,24 +50,23 @@ function Mobile() {
 						<p className="text-sm text-gray-400 mt-2">{uploadMessage}</p>
 					)} */}
 				</div>
+
+				<form onSubmit={handleSubmit} className="mb-6 space-y-2">
+					<textarea
+						className="w-full p-2 rounded bg-neutral-800 text-white"
+						onChange={(e) => setBio(e.target.value)}
+						value={bio || ""}
+						placeholder="Update your bio..."
+						rows={3}
+					/>
+					<button
+						type="submit"
+						className="w-full px-4 py-2 bg-success-600 text-white rounded"
+					>
+						Save Bio
+					</button>
+				</form>
 			</div>
-
-			<p className="mb-6">{bio || "No bio yet..."}</p>
-
-			<form onSubmit={handleBioSubmit} className="mb-6 space-y-2">
-				<textarea
-					className="w-full p-2 rounded bg-neutral-800 text-white"
-					onChange={(e) => setBio(e.target.value)}
-					placeholder="Update your bio..."
-					rows={3}
-				/>
-				<button
-					type="submit"
-					className="px-4 py-2 bg-success-600 text-white rounded"
-				>
-					Save Bio
-				</button>
-			</form>
 
 			{/* Friends */}
 			<div className="bg-[color:var(--color-surface-600)] rounded-xl px-6 py-5 my-6 shadow-md">
@@ -115,7 +119,6 @@ function Web() {
 		</main>
 	);
 }
-
 
 export default function ProfilePage() {
 	const { isMobile, isSafari } = useDevice();
