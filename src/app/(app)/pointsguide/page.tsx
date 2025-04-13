@@ -56,9 +56,9 @@ export default function PointsGuidePage() {
 			<ul>
 				Game Points System:
 				<ul className="list-disc pl-5 mt-1 space-y-1">
-					<li> +15 points for drinking ≥100 oz of water </li>
-					<li> +10 points for keeping caffeine &lt; 200 mg </li>
-					<li> +15 points for staying under the sugar cap all day </li>
+					<li> +150 points for drinking ≥100 oz of water </li>
+					<li> +100 points for keeping caffeine &lt; 200 mg </li>
+					<li> +150 points for staying under the sugar cap all day </li>
 					<li>
 						{" "}
 						Exceeding 400mg caffeine limit or 30.5g sugar limit = 0 pts logged
