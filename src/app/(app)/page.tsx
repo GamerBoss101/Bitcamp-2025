@@ -6,7 +6,7 @@ function Mobile() {
 	const { isAuthenticated, session } = useDevice();
 
 	return (
-		<main className="flex flex-col gap-[32px] row-start-2 items-center mt-10">
+		<main className="flex flex-col gap-[32px] row-start-2 items-center mt-10 text-white">
 			<h1 className="text-3xl sm:text-4xl font-bold tracking-[-.01em] text-center sm:text-left">
 				{isAuthenticated ? `Welcome, ${session.username} !!` : ""}
 			</h1>
@@ -35,7 +35,7 @@ function Web() {
 
 	return (
 		<main className="flex flex-col row-start-2 items-center mt-10">
-			<h1 className="text-3xl sm:text-4xl font-bold tracking-[-.01em] text-center sm:text-left">
+			<h1 className="text-3xl sm:text-4xl font-bold tracking-[-.01em] text-center sm:text-left text-white">
 				{isAuthenticated ? `Welcome, ${session.username} !!` : ""}
 			</h1>
 		</main>
