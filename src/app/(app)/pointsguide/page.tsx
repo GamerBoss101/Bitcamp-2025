@@ -70,7 +70,7 @@ export default function PointsGuidePage() {
 			<div className="bg-surface-700 rounded-xl px-4 py-4 my-6 shadow-sm">
 				<div className="overflow-x-auto rounded-xl">
 					<table className="min-w-full text-sm text-left text-[color:var(--color-warning-200)]">
-						<caption className="caption-top p-4 text-lg font-semibold text-[color:var(--color-warning-200)]">
+						<caption className="caption-top p-4 text-xl font-semibold text-[color:var(--color-warning-200)]">
 							Beverage Scoring System
 						</caption>
 
