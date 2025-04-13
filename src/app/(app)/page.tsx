@@ -9,7 +9,7 @@ function Mobile() {
 	const [friendsPostsData, setFriendsPosts] = useState<any[]>([]);
 
 	function getFriendsPosts(friendId: any) {
-		fetch(`/api/users/${friendId}/posts`)
+		fetch(`/api/user/${friendId}/posts`)
 			.then((res) => res.json())
 			.then((data) => {
 				if (data.posts) {
@@ -25,12 +25,14 @@ function Mobile() {
 
 	// Fetch friends' posts
 	useEffect(() => {
-		if (isAuthenticated && session?.friends) {
-			let friendsIds = session.friends.map((friend: any) => friend.id);
+		if (isAuthenticated && session) {
+			let friendsIds = session.friends.map((friend: any) => friend);
+
+			console.log("Friends IDs:", friendsIds);
 
 			// use /api/users/:id to get friend data
 			friendsIds.forEach((friendId: any) => {
-				fetch(`/api/users/${friendId}`)
+				fetch(`/api/user/${friendId}`)
 					.then((res) => res.json())
 					.then((data) => {
 						if (data.user) {
@@ -44,7 +46,7 @@ function Mobile() {
 					});
 			});
 		}
-	}, [isAuthenticated, session?.friends]);
+	}, [isAuthenticated, session]);
 
 	return (
 		<main className="flex flex-col gap-[32px] row-start-2 items-center mt-10 text-white">
@@ -107,6 +109,6 @@ function Web() {
 
 export default function Home() {
 	const { isMobile, isSafari } = useDevice();
-	if (isMobile && isSafari) return <Mobile />;
-	else return <Web />;
+	if (isMobile && isSafari) return Mobile();
+	else return Mobile();
 }
