@@ -81,7 +81,7 @@ export default function Post({
                 <img
                     src={"data:image/png;base64," + post.image}
                     alt="Post related"
-                    className="w-full max-h-64 object-cover rounded mb-4"
+                    className="w-full max-h-64 object-contain rounded mb-4"
                 />
             )}
 
