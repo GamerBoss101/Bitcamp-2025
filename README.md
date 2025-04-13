@@ -6,7 +6,6 @@ Drink Happy is a fun and engaging web application designed to help users track t
 
 ### 🎮 Gamified Drink Tracking
 - Earn points for healthy drink choices.
-- Lose points for exceeding caffeine or sugar limits.
 - View a detailed **Points Guide** to understand how points are calculated.
 
 ### 🏆 Activity Feed

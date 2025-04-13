@@ -13,6 +13,7 @@ function Mobile() {
 	const [friends, setFriends] = useState(session?.friends || []);
 	const [requests, setRequests] = useState(session?.requests || []);
 	const [friendCode, setFriendCode] = useState(""); // Input for sending friend requests
+	const [leaderboard, setLeaderboard] = useState<any[]>([]); // Leaderboard data
 
 	useEffect(() => {
 		if (isAuthenticated && session) {
@@ -21,8 +22,59 @@ function Mobile() {
 			setPoints(session.points || 0);
 			setFriends(session.friends || []);
 			setRequests(session.requests || []);
+
+			// Fetch leaderboard data
+			const fetchLeaderboard = async () => {
+				try {
+					const friendsData = await Promise.all(
+						(session.friends || []).map((friendId: string) =>
+							fetch(`/api/user/${friendId}`)
+								.then((res) => {
+									if (!res.ok) {
+										throw new Error(`Failed to fetch data for friend ${friendId}`);
+									}
+									return res.json();
+								})
+								.then((data) => {
+									if (data.user) {
+										return {
+											id: data.user.id,
+											username: data.user.username || "Unknown User",
+											points: data.user.points || 0,
+										};
+									} else {
+										console.error(`No user found for friend ID: ${friendId}`);
+										return null;
+									}
+								})
+								.catch((err) => {
+									console.error(`Error fetching data for friend ${friendId}:`, err);
+									return null;
+								})
+						)
+					);
+
+					// Include the current user in the leaderboard
+					const userData = {
+						id: session.id,
+						username: session.username || "You",
+						points: session.points || 0,
+					};
+
+					// Combine and sort by points in descending order
+					const sortedLeaderboard = [userData, ...friendsData.filter(Boolean)].sort(
+						(a, b) => b.points - a.points
+					);
+					
+					setLeaderboard(sortedLeaderboard);
+				} catch (error) {
+					console.error("Error fetching leaderboard data:", error);
+				}
+			};
+
+			fetchLeaderboard();
 		}
-	}, [session]);
+	}, [isAuthenticated, session]);
 
 	function handleSubmit(e: React.FormEvent) {
 		e.preventDefault();
@@ -235,6 +287,32 @@ function Mobile() {
 				</div>
 			</div>
 
+			 {/* Leaderboard Card */}
+			<div className="bg-[color:var(--color-surface-800)] rounded-xl px-6 py-5 my-6 shadow-md">
+				<h2 className="text-3xl font-bold tracking-[-.01em] text-[color:var(--color-warning-300)] mb-4">
+					Leaderboard
+				</h2>
+				<div className="space-y-4">
+					{leaderboard.map((entry, index) => (
+						<div
+							key={entry.id}
+							className={`flex justify-between items-center p-3 rounded ${
+								entry.id === session.id
+									? "bg-[color:var(--color-success-600)]"
+									: "bg-[color:var(--color-surface-700)]"
+							}`}
+						>
+							<span className="font-semibold text-white">
+								{index + 1}. {entry.username}
+							</span>
+							<span className="text-[color:var(--color-warning-300)] font-bold">
+								{entry.points} pts
+							</span>
+						</div>
+					))}
+				</div>
+			</div>
+
 			{/* Friends, Friend Requests, and Send Friend Request Section */}
 			<div className="bg-[color:var(--color-surface-800)] rounded-xl px-6 py-5 my-6 shadow-md">
 				<h2 className="text-3xl font-bold tracking-[-.01em] text-[color:var(--color-warning-300)] mb-4">
@@ -319,8 +397,34 @@ function Mobile() {
 	);
 }
 
+function Web() {
+	const { isAuthenticated, session } = useDevice();
+	return (
+		<main className="flex flex-col gap-[32px] my-20 row-start-2 items-center mt-10 text-white">
+			<img
+				src="/drinkhappylogo.png"
+				alt="Drink Happy Logo Image"
+				className="h-auto mx-auto my-auto w-3/4 lg:w-1/3"
+			/>
+			<h1 className="text-3xl sm:text-4xl font-bold tracking-[-.01em] text-center sm:text-left">
+				{isAuthenticated ? `Welcome, ${session.username} !!` : ""}
+			</h1>
+			{!isAuthenticated ? (
+				<div className="flex gap-4">
+					<button type="button" className="btn bg-surface-500">
+						<a href="/auth/login?screen_hint=signup">Sign up</a>
+					</button>
+					<button type="button" className="btn bg-surface-500">
+						<a href="/auth/login?screen_hint=login">Log in</a>
+					</button>
+				</div>
+			) : null}
+		</main>
+	);
+}
+
 export default function ProfilePage() {
 	const { isMobile, isSafari } = useDevice();
-	if (isMobile && isSafari) return <Mobile />;
-	else return <Mobile />;
+	if (isMobile && isSafari) return Mobile();
+	else return Mobile();
 }
