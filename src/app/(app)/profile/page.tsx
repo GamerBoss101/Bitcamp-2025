@@ -98,9 +98,6 @@ function Mobile() {
 					Don't forget you have a 400mg caffeine limit and 30.5g sugar limit!
 				</p>
 			</div>
-
-			<div className="h-6" />
-			<div className="h-6" />
 		</div>
 	);
 }
