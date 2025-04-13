@@ -29,8 +29,6 @@ export default function RootLayout({
             >
                 <DeviceProvider>
                     {children}
-
-                    
                 </DeviceProvider>
             </body>
         </html>

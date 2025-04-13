@@ -16,13 +16,7 @@ export default function RootLayout({
 		<main suppressHydrationWarning={true}>
 			{!isMobile && !isSafari ? <NavBar /> : null}
 			<section className="min-h-screen max-w-screen space-x-2 gap-4 flex flex-col">
-				<Image
-					src="/drinkhappylogo.png"
-					alt="Drink Happy Logo Image"
-					width={200}
-					height={200}
-					className="h-auto mx-auto w-1/4"
-				/>
+				<img src="/drinkhappylogo.png" alt="Drink Happy Logo Image" className="h-auto mx-auto w-3/4 lg:w-1/4" />
 				{children}
 			</section>
 			{isMobile && isSafari ? (
