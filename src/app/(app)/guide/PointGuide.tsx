@@ -56,7 +56,7 @@ const tableData = [
 const PointGuide = () => {
 
     return (
-		<div className="px-6 py-10 max-w-full lg:max-w-3/4 mx-auto font-sans text-neutral-100">
+		<div>
 			<h1 className="text-2xl sm:text-3xl font-bold mb-4 text-white">
   				Points Guide
 			</h1>

@@ -5,7 +5,7 @@ import React from "react";
 const InfoContent = () => {
 
     return (
-        <div className="px-6 py-10 max-w-full lg:max-w-1/2 mx-auto font-sans text-neutral-100">
+        <div>
             <h1 className="text-3xl dark:text-3xl font-bold mb-4">
                 Beverage Consumption Info!
             </h1>

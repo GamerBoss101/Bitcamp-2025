@@ -7,6 +7,11 @@ function Mobile() {
 
 	return (
 		<main className="flex flex-col gap-[32px] row-start-2 items-center mt-10 text-white">
+			<img
+				src="/drinkhappylogo.png"
+				alt="Drink Happy Logo Image"
+				className="h-auto mx-auto my-auto w-3/4 lg:w-1/3"
+			/>
 			<h1 className="text-3xl sm:text-4xl font-bold tracking-[-.01em] text-center sm:text-left">
 				{isAuthenticated ? `Welcome, ${session.username} !!` : ""}
 			</h1>
@@ -35,6 +40,11 @@ function Web() {
 
 	return (
 		<main className="flex flex-col row-start-2 items-center mt-10">
+			<img
+				src="/drinkhappylogo.png"
+				alt="Drink Happy Logo Image"
+				className="h-auto mx-auto w-3/4 lg:w-1/3"
+			/>
 			<h1 className="text-3xl sm:text-4xl font-bold tracking-[-.01em] text-center sm:text-left text-white">
 				{isAuthenticated ? `Welcome, ${session.username} !!` : ""}
 			</h1>
