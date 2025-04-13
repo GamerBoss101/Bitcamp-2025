@@ -14,7 +14,11 @@ function Mobile() {
             .then((res) => res.json())
             .then((data) => {
                 if (data.posts) {
-                    setFriendsPosts((prevPosts) => [...prevPosts, ...data.posts]);
+                    setFriendsPosts((prevPosts) =>
+                        [...prevPosts, ...data.posts].sort(
+                            (a, b) => new Date(b.timeStamp).getTime() - new Date(a.timeStamp).getTime()
+                        )
+                    );
                 } else {
                     console.error("No posts found for friend ID:", friendId);
                 }
@@ -44,14 +48,16 @@ function Mobile() {
 
             if (response.ok) {
                 setFriendsPosts((prevPosts) =>
-                    prevPosts.map((post) =>
-                        post.id === postId
-                            ? {
-                                  ...post,
-                                  reactions: [...post.reactions, { liked: true, warned: false }],
-                              }
-                            : post
-                    )
+                    prevPosts
+                        .map((post) =>
+                            post.id === postId
+                                ? {
+                                      ...post,
+                                      reactions: [...post.reactions, { liked: true, warned: false }],
+                                  }
+                                : post
+                        )
+                        .sort((a, b) => new Date(b.timeStamp).getTime() - new Date(a.timeStamp).getTime())
                 );
             } else {
                 const data = await response.json();
@@ -72,14 +78,16 @@ function Mobile() {
 
             if (response.ok) {
                 setFriendsPosts((prevPosts) =>
-                    prevPosts.map((post) =>
-                        post.id === postId
-                            ? {
-                                  ...post,
-                                  reactions: [...post.reactions, { liked: false, warned: true }],
-                              }
-                            : post
-                    )
+                    prevPosts
+                        .map((post) =>
+                            post.id === postId
+                                ? {
+                                      ...post,
+                                      reactions: [...post.reactions, { liked: false, warned: true }],
+                                  }
+                                : post
+                        )
+                        .sort((a, b) => new Date(b.timeStamp).getTime() - new Date(a.timeStamp).getTime())
                 );
             } else {
                 const data = await response.json();
