@@ -42,7 +42,7 @@ export async function POST(req: Request) {
 		if(inventory) {
 			let inventoryData = userData.inventory;
 			if (!inventoryData) inventoryData = [];
-			inventoryData.push(inventory.toString());
+			inventoryData.push(parseInt(inventory.toString()));
 
 			userData = await db.users.update(userData.id, { inventory: inventoryData });
 			if (!userData) return NextResponse.json({ message: "Failed to update inventory" }, { status: 500 });

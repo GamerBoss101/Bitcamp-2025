@@ -12,7 +12,7 @@ const userSchema = new mongoose.Schema({
     bio: String,
     avatar: Number,
 	points: Number,
-	inventory: Array,
+	inventory: Array<Number>,
 	friends: Array<String>,
 	requests: Array<String>,
 });
