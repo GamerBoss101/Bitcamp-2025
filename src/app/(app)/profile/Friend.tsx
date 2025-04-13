@@ -4,9 +4,10 @@ import { useState, useEffect } from "react";
 
 interface FriendProps {
     friendCode: string;
+    onRemove: (friendCode: string) => void;
 }
 
-export default function Friend({ friendCode }: FriendProps) {
+export default function Friend({ friendCode, onRemove }: FriendProps) {
     const [username, setUsername] = useState<string | null>(null);
 
     useEffect(() => {
@@ -31,6 +32,12 @@ export default function Friend({ friendCode }: FriendProps) {
             <span className="text-neutral-200">
                 {username ? `${username} (${friendCode})` : "Loading..."}
             </span>
+            <button
+                className="px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700"
+                onClick={() => onRemove(friendCode)}
+            >
+                Remove
+            </button>
         </li>
     );
 }

@@ -138,6 +138,33 @@ function Mobile() {
 		alert(`Denied friend request from ${request}`);
 	}
 
+	function handleRemoveFriend(friendCode: string) {
+		// Remove the friend from the friends array and update the state
+		setFriends((prev: string[]) => prev.filter((friend) => friend !== friendCode));
+
+
+		const formData = new FormData();
+		formData.append("friends", JSON.stringify(friends.filter((friend: string) => friend !== friendCode)));
+
+		// Update the user's friends in the database
+		fetch(`/api/me`, {
+			method: "POST",
+			body: formData,
+		})
+			.then((res) => res.json())
+			.then((data) => {
+				if (data.message === "Friend removed successfully") {
+					alert("Friend removed successfully!");
+				} else {
+					alert("Failed to remove friend.");
+				}
+			})
+			.catch((err) => {
+				console.error("Error removing friend:", err);
+				alert("An error occurred while removing the friend.");
+			});
+	}
+
 	return (
 		<div className="px-6 py-10 my-10 max-w-full lg:max-w-1/2 mx-auto font-sans text-neutral-100">
 			<div className="bg-[color:var(--color-surface-800)]/70 backdrop-blur-md rounded-xl px-6 py-5 my-6 shadow-sm">
@@ -205,7 +232,7 @@ function Mobile() {
 					<ul className="list-none space-y-4">
 						{friends.length > 0 ? (
 							friends.map((friendCode: string, index: number) => (
-								<Friend key={index} friendCode={friendCode} />
+								<Friend key={index} friendCode={friendCode} onRemove={handleRemoveFriend} />
 							))
 						) : (
 							<p className="text-neutral-400">No friends yet.</p>

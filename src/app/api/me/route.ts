@@ -71,10 +71,16 @@ export async function POST(req: Request) {
 			userData = await db.users.update(userData.id, { requests: JSON.parse(requests.toString()) });
 			if (!userData) return NextResponse.json({ message: "Failed to update requests" }, { status: 500 });
 		}
+
+		let friends = formData.get("friends");
+		if(friends) {
+			userData = await db.users.update(userData.id, { friends: JSON.parse(friends.toString()) });
+			if (!userData) return NextResponse.json({ message: "Failed to update friends" }, { status: 500 });
+		}
         
         return NextResponse.json({ message: "User updated successfully", user: userData }, { status: 200 });
 	} catch (error) {
-		console.error("Error updating user bio:", error);
+		console.error("Error handling user update:", error);
 		return NextResponse.json(
 			{ message: "Internal server error" },
 			{ status: 500 }
