@@ -5,25 +5,15 @@ const reqString = {
     required: true,
 }
 
-const reqNumber = {
-    type: Number,
-    required: true,
-}
-
-const reqBoolean = {
-    type: Boolean,
-    required: true,
-}
-
 const userSchema = new mongoose.Schema({
     email: reqString,
     username: reqString,
-    points: reqNumber,
-    owned: reqBoolean,
+    points: Number,
     inventory : Array,
-    imageDescription: reqString,
-    ButtonsOptions: Array
-});12
+    id: reqString,
+    friends: Array,
+    requests: Array,
+})
 
 export class User {
   model: mongoose.Model<any>;
@@ -32,16 +22,16 @@ export class User {
       this.model = mongoose.model('user', userSchema);
       this.upsert = { upsert: true };
   }
-  async create(id: string, pickupLine: string, followUpLine: string, ButtonsOptions: Array<any>, colors: any, image: any, password: string) {
+  async create(email: string, username: string, points: number, inventory: Array<any>, id: string, friends: Array<any>, requests: Array<any>) {
       const newEntry = new this.model({
+          email: email,
+          username: username,
+          points: points,
+          inventory: inventory,
           id: id,
-          pickupLine: pickupLine,
-          followUpLine: followUpLine,
-          ButtonsOptions: ButtonsOptions,
-          colors: colors,
-          image: image,
-          date: new Date().toISOString(),
-          password: password,
+          friends: friends,
+          requests: requests,
+          
       });
       await newEntry.save();
       return newEntry;
