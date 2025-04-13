@@ -15,7 +15,7 @@ export default function RootLayout({
 	return (
 		<main>
 			{!isMobile && !isSafari ? <NavBar /> : null}
-			<section className="grid grid-rows-[1fr_auto]">
+			<section className="grid grid-rows-[1fr_auto] min-h-screen max-w-screen">
 				<Image
 					src="/drinkhappylogo.png"
 					alt="Drink Happy Logo Image"

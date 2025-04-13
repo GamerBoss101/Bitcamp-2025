@@ -45,7 +45,7 @@ const tableData = [
 
 export default function PointsGuidePage() {
 	return (
-		<div className="px-6 py-10 max-w-3xl mx-auto font-sans text-neutral-100">
+		<div className="px-6 py-10 mx-auto font-sans text-neutral-100">
 			<h1 className="text-3xl font-bold mb-4 text-[color:var(--color-warning-300)]">
 				Points Guide
 			</h1>
