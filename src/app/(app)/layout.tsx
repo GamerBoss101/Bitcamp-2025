@@ -13,9 +13,9 @@ export default function RootLayout({
 }>) {
 	const { isMobile, isSafari } = useDevice();
 	return (
-		<main>
+		<main suppressHydrationWarning={true}>
 			{!isMobile && !isSafari ? <NavBar /> : null}
-			<section className="grid grid-rows-[1fr_auto] min-h-screen max-w-screen">
+			<section className="min-h-screen max-w-screen space-x-2 gap-4 flex flex-col">
 				<Image
 					src="/drinkhappylogo.png"
 					alt="Drink Happy Logo Image"
