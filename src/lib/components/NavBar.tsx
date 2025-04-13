@@ -26,11 +26,8 @@ const NavBar = () => {
 						</a>
 					</h1>
 					<div className="hidden md:flex items-center gap-4 justify-center">
-						<a href="/info" className="btn variant-ghost">
-							Info
-						</a>
-						<a href="/pointsguide" className="btn variant-ghost">
-							Points Guide
+						<a href="/guide" className="btn variant-ghost">
+							Guide
 						</a>
 					</div>
 					<div className="justify-self-end">

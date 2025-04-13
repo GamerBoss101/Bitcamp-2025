@@ -1,5 +1,7 @@
 "use client";
 
+import React from "react";
+
 const tableData = [
 	{
 		drink: "Water",
@@ -51,8 +53,9 @@ const tableData = [
 	},
 ];
 
-export default function PointsGuidePage() {
-	return (
+const PointGuide = () => {
+
+    return (
 		<div className="px-6 py-10 max-w-full lg:max-w-3/4 mx-auto font-sans text-neutral-100">
 			<h1 className="text-2xl sm:text-3xl font-bold mb-4 text-white">
   				Points Guide
@@ -110,5 +113,7 @@ export default function PointsGuidePage() {
 				</div>
 			</div>
 		</div>
-	);
-}
+    );
+};
+
+export default PointGuide;

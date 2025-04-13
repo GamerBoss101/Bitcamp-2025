@@ -18,17 +18,14 @@ const MobileNav = () => {
     return (
         <div className="p-4 flex flex-col items-center gap-4 bg-surface-900">
             <Navigation.Bar className="flex justify-around w-full">
-                <Navigation.Tile label="Home" href="/" className="flex flex-col items-center">
+                <Navigation.Tile href="/" className="flex flex-col items-center">
                     <IconHome />
                 </Navigation.Tile>
-                <Navigation.Tile label="Info" href="/info" className="flex flex-col items-center">
+                <Navigation.Tile href="/guide" className="flex flex-col items-center">
                     <BookImage />
                 </Navigation.Tile>
-                <Navigation.Tile label="Points Guide" href="/pointsguide" className="flex flex-col items-center">
-                    <CoinsImage />
-                </Navigation.Tile>
                 {isAuthenticated ? (
-                   <Navigation.Tile label="Profile" href="/profile" className="flex flex-col items-center">
+                   <Navigation.Tile href="/profile" className="flex flex-col items-center">
                         <UserImage />
                     </Navigation.Tile>
                 ) : null}
