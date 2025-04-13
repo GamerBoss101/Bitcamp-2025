@@ -75,6 +75,7 @@ function Mobile() {
 					<div className="space-y-6">
 						{friendsPostsData.map((post, index) => (
 							<Post
+								showDeleteButton={false} // No delete option for friends' posts
 								key={index}
 								post={post}
 								allowReactions={true} // Allow reactions for friends' posts

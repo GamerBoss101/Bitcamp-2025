@@ -14,7 +14,8 @@ interface PostProps {
     onLike: () => void;
     onWarning: () => void;
     onDelete: () => void; // Callback for deleting the post
-    allowReactions: boolean; // New property to toggle reactions
+    allowReactions: boolean; // Property to toggle reactions
+    showDeleteButton?: boolean; // New property to toggle the delete button
 }
 
 export default function Post({
@@ -23,6 +24,7 @@ export default function Post({
     onWarning,
     onDelete,
     allowReactions,
+    showDeleteButton = true, // Default to true if not provided
 }: PostProps) {
     const [userData, setUserData] = useState<{ username: string; avatar: number } | null>({
         username: "Loading...",
@@ -112,12 +114,14 @@ export default function Post({
                 >
                     😭 Stop drinking that ({post.reactions.filter((reaction) => reaction.warned).length})
                 </button>
-                <button
-                    onClick={onDelete}
-                    className="px-3 py-1 rounded text-sm bg-red-600 hover:bg-red-700 text-white"
-                >
-                    🗑️ Delete
-                </button>
+                {showDeleteButton && (
+                    <button
+                        onClick={onDelete}
+                        className="px-3 py-1 rounded text-sm bg-red-600 hover:bg-red-700 text-white"
+                    >
+                        🗑️ Delete
+                    </button>
+                )}
             </div>
         </div>
     );
