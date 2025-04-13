@@ -135,4 +135,24 @@ function Mobile() {
     );
 }
 
-export default Mobile;
+function Web() {
+	return (
+		<main className="flex flex-col gap-[32px] my-20 row-start-2 items-center mt-10 text-white">
+			<img
+				src="/drinkhappylogo.png"
+				alt="Drink Happy Logo Image"
+				className="h-auto mx-auto my-auto w-3/4 lg:w-1/3"
+			/>
+			<h1 className="text-3xl sm:text-4xl font-bold tracking-[-.01em] text-center sm:text-left">
+				Welcome to Drink Happy!
+			</h1>
+		</main>
+	);
+}
+
+export default function Home() {
+	const { isMobile, isSafari } = useDevice();
+
+	if(isMobile && isSafari) return Mobile();
+	else return Web();
+}

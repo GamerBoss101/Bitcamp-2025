@@ -91,11 +91,11 @@ export default function Post({
             )}
 
             {/* Post Actions */}
-            <div className="flex gap-4 items-center">
+            <div className="flex flex-col gap-4 items-center">
                 <button
                     onClick={onLike}
                     disabled={!allowReactions} // Disable button if allowReactions is false
-                    className={`px-3 py-1 rounded text-sm ${
+                    className={`px-3 py-1 w-full rounded text-sm ${
                         allowReactions
                             ? "bg-success-600 hover:bg-primary-600 text-white"
                             : "bg-gray-500 text-gray-300 cursor-not-allowed"
@@ -106,7 +106,7 @@ export default function Post({
                 <button
                     onClick={onWarning}
                     disabled={!allowReactions} // Disable button if allowReactions is false
-                    className={`px-3 py-1 rounded text-sm ${
+                    className={`px-3 py-1 w-full rounded text-sm ${
                         allowReactions
                             ? "bg-primary-500 hover:bg-red-600 text-white"
                             : "bg-gray-500 text-gray-300 cursor-not-allowed"
