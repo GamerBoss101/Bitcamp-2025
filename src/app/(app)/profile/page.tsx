@@ -59,9 +59,9 @@ function Mobile() {
         }
 
         const formData = new FormData();
-        formData.append("friendCode", friendCode);
+        formData.append("friendCode", session?.id);
 
-        fetch(`/api/user/${session?.id}`, {
+        fetch(`/api/user/${friendCode}`, {
             method: "POST",
             body: formData,
         })
