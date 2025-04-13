@@ -45,43 +45,42 @@ const tableData = [
 
 export default function PointsGuidePage() {
 	return (
-		<div className="px-6 py-10 mx-auto font-sans text-neutral-100">
-			<h1 className="text-3xl font-bold mb-4 text-[color:var(--color-warning-300)]">
+		<div className="px-6 py-10 max-w-full lg:max-w-3/4 mx-auto font-sans text-neutral-100">
+			<h1 className="text-2xl sm:text-3xl font-bold mb-4 text-[color:var(--color-warning-300)]">
 				Points Guide
 			</h1>
-			<p className="mb-6 text-surface-300">
+			<p className="mb-6 text-sm sm:text-base text-surface-300">
 				Learn how many points you receive for each drink!
 			</p>
 
 			<ul>
-				Game Points System:
-				<ul className="list-disc pl-5 mt-1 space-y-1">
+				<span className="text-base sm:text-lg">Game Points System:</span>
+				<ul className="list-disc pl-5 mt-1 space-y-1 text-sm sm:text-base">
 					<li> +150 points for drinking ≥100 oz of water </li>
 					<li> +100 points for keeping caffeine &lt; 200 mg </li>
 					<li> +150 points for staying under the sugar cap all day </li>
 					<li>
-						{" "}
-						Exceeding 400mg caffeine limit or 30.5g sugar limit = 0 pts logged
-						for those drinks{" "}
+						Exceeding 400mg caffeine limit or 30.5g sugar limit = 0 pts logged for
+						those drinks
 					</li>
 				</ul>
 			</ul>
 
 			<div className="bg-surface-700 rounded-xl px-4 py-4 my-6 shadow-sm">
-				<div className="overflow-x-auto rounded-xl">
-					<table className="min-w-full text-sm text-left text-[color:var(--color-warning-200)]">
-						<caption className="caption-top p-4 text-xl font-semibold text-[color:var(--color-warning-200)]">
+				<div className="overflow-x-auto rounded-xl scroll-auto">
+					<table className="min-w-full text-xs sm:text-sm text-left text-[color:var(--color-warning-200)]">
+						<caption className="caption-top p-4 text-lg sm:text-xl font-semibold text-[color:var(--color-warning-200)]">
 							Beverage Scoring System
 						</caption>
 
 						<thead className="bg-[color:var(--color-surface-200)] text-[color:var(--color-success-950)] text-center">
 							<tr>
-								<th className="px-4 py-2">Drink</th>
-								<th className="px-4 py-2">Volume (oz)</th>
-								<th className="px-4 py-2">Caffeine (mg)</th>
-								<th className="px-4 py-2">Sugar (g)</th>
-								<th className="px-4 py-2">Points Earned</th>
-								<th className="px-4 py-2">Bonus</th>
+								<th className="px-2 sm:px-4 py-2 whitespace-nowrap">Drink</th>
+								<th className="px-2 sm:px-4 py-2 whitespace-nowrap">Volume (oz)</th>
+								<th className="px-2 sm:px-4 py-2 whitespace-nowrap">Caffeine (mg)</th>
+								<th className="px-2 sm:px-4 py-2 whitespace-nowrap">Sugar (g)</th>
+								<th className="px-2 sm:px-4 py-2 whitespace-nowrap">Points Earned</th>
+								<th className="px-2 sm:px-4 py-2 whitespace-nowrap">Bonus</th>
 							</tr>
 						</thead>
 						<tbody className="[&>tr:hover]:bg-[color:var(--color-surface-800)] text-center">
@@ -90,21 +89,18 @@ export default function PointsGuidePage() {
 									key={i}
 									className="border-t border-[color:var(--color-surface-950)]"
 								>
-									<td className="px-2 py-2 font-medium">{row.drink}</td>
-									<td className="px-2 py-2">{row.volume}</td>
-									<td className="px-2 py-2">{row.caffeine}</td>
-									<td className="px-2 py-2">{row.sugar}</td>
-									<td className="px-2 py-2 font-bold">{row.points}</td>
-									<td className="px-2 py-2 italic">{row.bonus}</td>
+									<td className="px-2 py-2 font-medium whitespace-nowrap">{row.drink}</td>
+									<td className="px-2 py-2 whitespace-nowrap">{row.volume}</td>
+									<td className="px-2 py-2 whitespace-nowrap">{row.caffeine}</td>
+									<td className="px-2 py-2 whitespace-nowrap">{row.sugar}</td>
+									<td className="px-2 py-2 font-bold whitespace-nowrap">{row.points}</td>
+									<td className="px-2 py-2 italic whitespace-nowrap">{row.bonus}</td>
 								</tr>
 							))}
 						</tbody>
 					</table>
 				</div>
 			</div>
-
-			<div className="h-6" />
-			<div className="h-6" />
 		</div>
 	);
 }
