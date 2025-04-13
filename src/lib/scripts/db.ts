@@ -1,11 +1,14 @@
 import mongoose from "mongoose";
 
-import User from "./User";
+import User from "./User";  
+import Post from "./Post";
 
 class DB {
     users: User;
+    posts: Post;
 	constructor() {
         this.users = new User();
+        this.posts = new Post();
         this.connect();
     }
 

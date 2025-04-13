@@ -3,8 +3,11 @@
 import React from "react";
 
 import Image from "next/image";
+import { useDevice } from "../context/DeviceContext";
 
 const NavBar = () => {
+	const { isAuthenticated } = useDevice();
+
 	return (
 		<nav className="sticky top-0 z-50 shadow-xl text-black dark:text-white bg-surface-800">
 			<div className="container mx-auto px-4">
@@ -29,6 +32,24 @@ const NavBar = () => {
 						<a href="/pointsguide" className="btn variant-ghost">
 							Points Guide
 						</a>
+					</div>
+					<div className="justify-self-end">
+						{isAuthenticated ? (
+							<div>
+								<button type="button" className="btn bg-surface-500">
+									<a href="/auth/logout">Logout</a>
+								</button>
+							</div>
+						) : (
+							<div className="flex gap-4">
+								<button type="button" className="btn bg-surface-500">
+									<a href="/auth/login?screen_hint=signup">Sign up</a>
+								</button>
+								<button type="button" className="btn bg-surface-500">
+									<a href="/auth/login?screen_hint=login">Log in</a>
+								</button>
+							</div>
+						)}
 					</div>
 				</div>
 			</div>

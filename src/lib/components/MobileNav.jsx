@@ -6,11 +6,13 @@ import {
     Home as IconHome,
     BookText as BookImage,
     Coins as CoinsImage,
+    User as UserImage,
 } from "lucide-react";
 
-import { useRouter } from "next/navigation";
-
 const Footer = () => {
+
+    const { isAuthenticated } = useDevice();
+
     return (
         <div className="p-4 flex flex-col items-center gap-4 bg-surface-900">
             <Navigation.Bar className="flex justify-around w-full">
@@ -23,6 +25,11 @@ const Footer = () => {
                 <Navigation.Tile label="Points Guide" href="/pointsguide" className="flex flex-col items-center">
                     <CoinsImage />
                 </Navigation.Tile>
+                {isAuthenticated ? (
+                   <Navigation.Tile label="Profile" href="/profile" className="flex flex-col items-center">
+                        <UserImage />
+                    </Navigation.Tile>
+                ) : null}
             </Navigation.Bar>
         </div>
     );
