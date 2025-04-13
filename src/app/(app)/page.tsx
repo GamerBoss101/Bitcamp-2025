@@ -49,7 +49,7 @@ function Mobile() {
 	}, [isAuthenticated, session]);
 
 	return (
-		<main className="flex flex-col gap-[32px] row-start-2 items-center mt-10 text-white">
+		<main className="flex flex-col gap-[32px] my-20 row-start-2 items-center mt-10 text-white">
 			<img
 				src="/drinkhappylogo.png"
 				alt="Drink Happy Logo Image"
