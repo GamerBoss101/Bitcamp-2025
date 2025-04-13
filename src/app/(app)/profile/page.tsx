@@ -83,7 +83,7 @@ function Mobile() {
 			{/* Daily Stats */}
 			<div className="bg-[color:var(--color-surface-600)]/70 backdrop-blur-md rounded-xl px-6 py-5 my-6 shadow-sm">
 				<h2 className="text-xl font-semibold text-[color:var(--color-warning-300)] mt-0 mb-2">
-					--------------------Daily Stats---------------------
+					Daily Stats
 				</h2>
 				<ul className="list-disc pl-5 text-neutral-200 space-y-1">
 					<li>Points Logged: [ dailyPoints variable ]</li>
