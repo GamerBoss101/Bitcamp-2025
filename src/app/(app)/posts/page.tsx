@@ -1,19 +1,28 @@
 "use client";
 
-import { useDevice } from "@/lib/context/DeviceContext";
+
+// HELP NOT WORKING -> import { useDevice } from "@/lib/context/DeviceContext"; USERNAME!!
+const useDevice = () => ({
+    isAuthenticated: true,
+    session: { username: "demo_user" },
+ });
+
+
 import React, { useEffect, useState } from "react";
 
 export default function PostsPage() {
   const [postText, setPostText] = useState("");
-  const [posts, setPosts] = useState<any[]>([]); // type of post??
+  const [posts, setPosts] = useState<any[]>([]);
+  const [userReactions, setUserReactions] = useState<{
+    [index: number]: { liked: boolean; warned: boolean };
+  }>({});
   const { isAuthenticated, session } = useDevice();
 
   useEffect(() => {
-        if (isAuthenticated && session?.username) {
-            fetch(`/api/user/${session.username}`)
-                .then((res) => res.json())
-        }
-    }, [isAuthenticated, session?.username]);
+    if (isAuthenticated && session?.username) {
+      fetch(`/api/user/${session.username}`).then((res) => res.json());
+    }
+  }, [isAuthenticated, session?.username]);
 
   const handlePostSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -22,7 +31,8 @@ export default function PostsPage() {
       date: new Date().toLocaleString(),
       likes: 0,
       warnings: 0,
-      imageUrl: "", // placeholder for image logic
+      imageUrl: "", // placeholder for image logick
+      author: session.username, // add username to track authorship
     };
     setPosts([newPost, ...posts]);
     setPostText("");
@@ -30,21 +40,43 @@ export default function PostsPage() {
 
   const handleLike = (index: number) => {
     const updatedPosts = [...posts];
-    updatedPosts[index].likes += 1;
+    const reactions = { ...userReactions };
+
+    const alreadyLiked = reactions[index]?.liked;
+
+    updatedPosts[index].likes += alreadyLiked ? -1 : 1;
+
+    reactions[index] = {
+      ...reactions[index],
+      liked: !alreadyLiked,
+    };
+
     setPosts(updatedPosts);
+    setUserReactions(reactions);
   };
 
   const handleWarning = (index: number) => {
     const updatedPosts = [...posts];
-    updatedPosts[index].warnings += 1;
+    const reactions = { ...userReactions };
+
+    const alreadyWarned = reactions[index]?.warned;
+
+    updatedPosts[index].warnings += alreadyWarned ? -1 : 1;
+
+    reactions[index] = {
+      ...reactions[index],
+      warned: !alreadyWarned,
+    };
+
     setPosts(updatedPosts);
+    setUserReactions(reactions);
   };
 
   return (
     <div className="px-6 py-10 max-w-full lg:max-w-2xl mx-auto font-sans text-neutral-100">
       <div className="bg-[color:var(--color-surface-700)]/70 backdrop-blur-md rounded-xl px-6 py-5 mb-8 shadow-sm">
         <h1 className="text-3xl sm:text-4xl font-bold mb-0 text-[color:var(--color-warning-300)]">
-            Posts
+          Posts
         </h1>
       </div>
 
@@ -76,7 +108,7 @@ export default function PostsPage() {
               <div className="w-10 h-10 rounded-full bg-neutral-800 border border-gray-300" />
               <div>
                 <p className="font-semibold text-[color:var(--color-warning-300)]">
-                    [put username here - i tried] {/*isAuthenticated ? session.username : ""*/} 
+                  {post.author || "Anonymous"}
                 </p>
                 <p className="text-sm text-gray-400">{post.date}</p>
               </div>
@@ -84,7 +116,7 @@ export default function PostsPage() {
 
             {post.imageUrl && (
               <img
-                src={post.imageUrl} // placeholder logic - friend can wire this to Mongo
+                src={post.imageUrl}
                 alt="Post related"
                 className="w-full max-h-64 object-cover rounded mb-4"
               />
@@ -95,13 +127,21 @@ export default function PostsPage() {
             <div className="flex gap-4 items-center">
               <button
                 onClick={() => handleLike(index)}
-                className="px-3 py-1 rounded bg-success-600 text-white hover:bg-primary-600 text-sm"
+                className={`px-3 py-1 rounded text-sm ${
+                  userReactions[index]?.liked
+                    ? "bg-success-800"
+                    : "bg-success-600 hover:bg-primary-600"
+                } text-white`}
               >
                 👍 Like ({post.likes})
               </button>
               <button
                 onClick={() => handleWarning(index)}
-                className="px-3 py-1 rounded bg-primary-500 text-white hover:bg-red-600 text-sm"
+                className={`px-3 py-1 rounded text-sm ${
+                  userReactions[index]?.warned
+                    ? "bg-red-800"
+                    : "bg-primary-500 hover:bg-red-600"
+                } text-white`}
               >
                 😭 Stop drinking that ({post.warnings})
               </button>
