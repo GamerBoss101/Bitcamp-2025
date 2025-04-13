@@ -46,11 +46,11 @@ const tableData = [
 export default function PointsGuidePage() {
 	return (
 		<div className="px-6 py-10 max-w-full lg:max-w-3/4 mx-auto font-sans text-neutral-100">
-			<h1 className="text-2xl sm:text-3xl font-bold mb-4 text-[color:var(--color-neutral-100)]">
-				Points Guide
+			<h1 className="text-2xl sm:text-3xl font-bold mb-4 text-white">
+  				Points Guide
 			</h1>
-			<p className="mb-6 text-sm sm:text-base text-tertiary-100">
-				Learn how many points you receive for each drink!
+			<p className="mb-6 text-sm sm:text-base text-white">
+  					Learn how many points you receive for each drink!
 			</p>
 
 			<ul>
