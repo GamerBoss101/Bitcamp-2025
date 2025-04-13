@@ -151,9 +151,8 @@ function Mobile() {
 			method: "POST",
 			body: formData,
 		})
-			.then((res) => res.json())
-			.then((data) => {
-				if (data.message === "Friend removed successfully") {
+			.then((res) => {
+				if (res.ok) {
 					alert("Friend removed successfully!");
 				} else {
 					alert("Failed to remove friend.");
@@ -209,6 +208,27 @@ function Mobile() {
 						Save Profile
 					</button>
 				</form>
+			</div>
+
+			 {/* Points and Cosmetics Owned */}
+			<div className="bg-[color:var(--color-surface-800)] rounded-xl px-6 py-5 my-6 shadow-md">
+				<h2 className="text-3xl font-bold tracking-[-.01em] text-[color:var(--color-warning-300)] mb-4">
+					Points & Cosmetics
+				</h2>
+
+				{/* Total Points */}
+				<div className="mb-4">
+					<p className="text-lg text-neutral-100">
+						<strong>Total Points:</strong> {points}
+					</p>
+				</div>
+
+				{/* Cosmetics Owned */}
+				<div>
+					<p className="text-lg text-neutral-100">
+						<strong>Cosmetics Owned:</strong> {session?.inventory?.length || 0}
+					</p>
+				</div>
 			</div>
 
 			{/* Friends, Friend Requests, and Send Friend Request Section */}
