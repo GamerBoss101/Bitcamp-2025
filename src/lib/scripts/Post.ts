@@ -11,7 +11,7 @@ const postSchema = new mongoose.Schema({
     timeStamp: Date,
     reactions: Array,
     userId: reqString,
-    image: Buffer
+    image: String
 });
 
 export class Post {
@@ -32,7 +32,7 @@ export class Post {
         return result.join('');
     }
 
-    async create(userId:string, imageDes: string, image: Buffer) {
+    async create(userId:string, imageDes: string, image: string) {
         const newEntry = new this.model({
             id: this.makeId(5),
             imageDes: imageDes,
@@ -55,6 +55,13 @@ export class Post {
 
     async getAllByUserId(userId: string) {
         return await this.model.find({ userId: userId });
+    }
+
+    async addReaction(id: string, reaction: { liked: boolean; warned: boolean }) {
+        return await this.model.updateOne(
+            { id: id },
+            { $push: { reactions: reaction } }
+        );
     }
 
     async update(id: string, imageDes: string) {

@@ -2,33 +2,45 @@
 
 import { useDevice } from "@/lib/context/DeviceContext";
 import React, { useEffect, useState } from "react";
+import Post from "../../../lib/components/Post";
 
 export default function PostsPage() {
-    const [postText, setPostText] = useState("");
     const [posts, setPosts] = useState<any[]>([]);
     const [userReactions, setUserReactions] = useState<{
         [index: number]: { liked: boolean; warned: boolean };
     }>({});
     const [imageFile, setImageFile] = useState<File | null>(null);
+    const [alertMessage, setAlertMessage] = useState<string | null>(null); // State for alert message
     const { isAuthenticated, session } = useDevice();
 
+    // Fetch posts on component mount
     useEffect(() => {
-        if (isAuthenticated && session?.username) {
-            fetch(`/api/user/${session.username}`).then((res) => res.json());
+        if (isAuthenticated && session?.id) {
+            fetch(`/api/post`)
+                .then((res) => res.json())
+                .then((data) => {
+                    if (data.posts) {
+                        setPosts(data.posts);
+                    } else {
+                        console.error("Failed to fetch posts:", data.message);
+                    }
+                })
+                .catch((err) => {
+                    console.error("Error fetching posts:", err);
+                });
         }
-    }, [isAuthenticated, session?.username]);
+    }, [isAuthenticated, session?.id]);
 
     const handlePostSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
         if (!imageFile) {
-            alert("Please select an image to upload.");
+            setAlertMessage("Please select an image to upload.");
             return;
         }
 
         const formData = new FormData();
         formData.append("image", imageFile);
-        formData.append("text", postText);
 
         try {
             const response = await fetch("/api/post", {
@@ -38,51 +50,109 @@ export default function PostsPage() {
 
             const data = await response.json();
             if (response.ok) {
-                alert("Post uploaded successfully!");
-                setPosts([data.postData, ...posts]);
-                setPostText("");
-                setImageFile(null);
+                setAlertMessage(`Post uploaded successfully! You earned ${data.points} points!`);
+                setPosts([data.postData, ...posts]); // Add the new post to the list
+                setImageFile(null); // Clear the file input
             } else {
-                alert(data.message || "Failed to upload post.");
+                setAlertMessage(data.message || "Failed to upload post.");
             }
         } catch (error) {
             console.error("Error uploading post:", error);
-            alert("An error occurred while uploading the post.");
+            setAlertMessage("An error occurred while uploading the post.");
         }
     };
 
-    const handleLike = (index: number) => {
-        const updatedPosts = [...posts];
+    const handleLike = async (index: number) => {
+        const post = posts[index];
         const reactions = { ...userReactions };
 
-        const alreadyLiked = reactions[index]?.liked;
+        try {
+            const response = await fetch(`/api/post/${post.id}`, {
+                method: "POST",
+                body: new URLSearchParams({ like: "true" }),
+            });
 
-        updatedPosts[index].likes += alreadyLiked ? -1 : 1;
+            if (response.ok) {
+                const updatedPosts = [...posts];
+                const alreadyLiked = reactions[index]?.liked;
 
-        reactions[index] = {
-            ...reactions[index],
-            liked: !alreadyLiked,
-        };
+                // Update reactions in the post
+                updatedPosts[index].reactions.push({ liked: !alreadyLiked, warned: false });
 
-        setPosts(updatedPosts);
-        setUserReactions(reactions);
+                // Update local state
+                reactions[index] = {
+                    ...reactions[index],
+                    liked: !alreadyLiked,
+                };
+
+                setPosts(updatedPosts);
+                setUserReactions(reactions);
+            } else {
+                const data = await response.json();
+                alert(data.message || "Failed to like the post.");
+            }
+        } catch (error) {
+            console.error("Error liking post:", error);
+            alert("An error occurred while liking the post.");
+        }
     };
 
-    const handleWarning = (index: number) => {
-        const updatedPosts = [...posts];
+    const handleWarning = async (index: number) => {
+        const post = posts[index];
         const reactions = { ...userReactions };
 
-        const alreadyWarned = reactions[index]?.warned;
+        try {
+            const response = await fetch(`/api/post/${post.id}`, {
+                method: "POST",
+                body: new URLSearchParams({ warn: "true" }),
+            });
 
-        updatedPosts[index].warnings += alreadyWarned ? -1 : 1;
+            if (response.ok) {
+                const updatedPosts = [...posts];
+                const alreadyWarned = reactions[index]?.warned;
 
-        reactions[index] = {
-            ...reactions[index],
-            warned: !alreadyWarned,
-        };
+                // Update reactions in the post
+                updatedPosts[index].reactions.push({ liked: false, warned: !alreadyWarned });
 
-        setPosts(updatedPosts);
-        setUserReactions(reactions);
+                // Update local state
+                reactions[index] = {
+                    ...reactions[index],
+                    warned: !alreadyWarned,
+                };
+
+                setPosts(updatedPosts);
+                setUserReactions(reactions);
+            } else {
+                const data = await response.json();
+                alert(data.message || "Failed to warn the post.");
+            }
+        } catch (error) {
+            console.error("Error warning post:", error);
+            alert("An error occurred while warning the post.");
+        }
+    };
+
+    const handleDelete = async (index: number) => {
+        const post = posts[index];
+
+        try {
+            const response = await fetch(`/api/post/${post.id}`, {
+                method: "DELETE",
+            });
+
+            if (response.ok) {
+                alert("Post deleted successfully!");
+                const updatedPosts = [...posts];
+                updatedPosts.splice(index, 1); // Remove the deleted post from the list
+                setPosts(updatedPosts);
+            } else {
+                const data = await response.json();
+                alert(data.message || "Failed to delete the post.");
+            }
+        } catch (error) {
+            console.error("Error deleting post:", error);
+            alert("An error occurred while deleting the post.");
+        }
     };
 
     return (
@@ -93,15 +163,15 @@ export default function PostsPage() {
                 </h1>
             </div>
 
+            {/* Alert Message */}
+            {alertMessage && (
+                <div className="bg-success-600 text-white px-4 py-3 rounded mb-6">
+                    {alertMessage}
+                </div>
+            )}
+
             <div className="bg-[color:var(--color-surface-600)]/70 backdrop-blur-md rounded-xl px-6 py-5 mb-8 shadow-sm">
                 <form onSubmit={handlePostSubmit} className="space-y-3">
-                    <textarea
-                        className="w-full p-3 rounded bg-neutral-800 text-white"
-                        placeholder="Share your beverage..."
-                        value={postText}
-                        onChange={(e) => setPostText(e.target.value)}
-                        rows={4}
-                    />
                     <input
                         type="file"
                         accept="image/*"
@@ -117,56 +187,27 @@ export default function PostsPage() {
                 </form>
             </div>
 
-            <div className="space-y-6">
-                {posts.map((post, index) => (
-                    <div
-                        key={index}
-                        className="bg-[color:var(--color-surface-600)]/80 rounded-xl px-6 py-5 shadow-md"
-                    >
-                        <div className="flex items-center gap-4 mb-2">
-                            <div className="w-10 h-10 rounded-full bg-neutral-800 border border-gray-300" />
-                            <div>
-                                <p className="font-semibold text-[color:var(--color-warning-300)]">
-                                    {post.author || "Anonymous"}
-                                </p>
-                                <p className="text-sm text-gray-400">{post.date}</p>
-                            </div>
-                        </div>
-
-                        {post.imageUrl && (
-                            <img
-                                src={post.imageUrl}
-                                alt="Post related"
-                                className="w-full max-h-64 object-cover rounded mb-4"
+            {/* Post List Card */}
+            <div className="bg-[color:var(--color-surface-800)] rounded-xl px-6 py-5 shadow-md">
+                <h2 className="text-2xl font-bold text-[color:var(--color-warning-300)] mb-4">
+                    Post List
+                </h2>
+                <div className="space-y-6">
+                    {posts
+                        .slice() // Create a shallow copy of the posts array
+                        .sort((a, b) => new Date(b.timeStamp).getTime() - new Date(a.timeStamp).getTime()) // Sort by timeStamp in descending order
+                        .map((post, index) => (
+                            <Post
+                                allowReactions={false}
+                                key={index}
+                                post={post}
+                                userReactions={userReactions[index] || { liked: false, warned: false }}
+                                onLike={() => handleLike(index)}
+                                onWarning={() => handleWarning(index)}
+                                onDelete={() => handleDelete(index)} // Pass the delete handler
                             />
-                        )}
-
-                        <p className="text-base text-neutral-100 mb-4">{post.text}</p>
-
-                        <div className="flex gap-4 items-center">
-                            <button
-                                onClick={() => handleLike(index)}
-                                className={`px-3 py-1 rounded text-sm ${
-                                    userReactions[index]?.liked
-                                        ? "bg-success-800"
-                                        : "bg-success-600 hover:bg-primary-600"
-                                } text-white`}
-                            >
-                                👍 Like ({post.likes})
-                            </button>
-                            <button
-                                onClick={() => handleWarning(index)}
-                                className={`px-3 py-1 rounded text-sm ${
-                                    userReactions[index]?.warned
-                                        ? "bg-red-800"
-                                        : "bg-primary-500 hover:bg-red-600"
-                                } text-white`}
-                            >
-                                😭 Stop drinking that ({post.warnings})
-                            </button>
-                        </div>
-                    </div>
-                ))}
+                        ))}
+                </div>
             </div>
 
             <div className="h-10" />
