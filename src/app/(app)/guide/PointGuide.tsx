@@ -20,10 +20,10 @@ const tableData = [
 		bonus: "0 pts after 400mg caffeine",
 	},
 	{
-		drink: "Earl Grey Tea",
+		drink: "Tea",
 		volume: "8",
 		caffeine: "55",
-		sugar: "0",
+		sugar: "?",
 		points: "50",
 		bonus: "0 pts after 400mg caffeine",
 	},
