@@ -20,7 +20,7 @@ export async function GET(req: Request, { params }: any) {
     try {
         if (!(await authenticateUser())) return;
 
-        const { id } = params;
+        const { id } = await params;
 
         const user = await db.users.findById(id);
 
@@ -40,7 +40,7 @@ export async function POST(req: Request, { params }: any) {
     try {
         if (!(await authenticateUser())) return;
 
-        const { id } = params;
+        const { id } = await params;
 
         let user = await db.users.findById(id);
 

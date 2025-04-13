@@ -48,13 +48,29 @@ export async function POST(req: Request) {
 			if (!userData) return NextResponse.json({ message: "Failed to update inventory" }, { status: 500 });
 		}
 
-		let friends = formData.get("friends");
-		if(friends) {
+		let friend = formData.get("friend");
+		if(friend) {
 			let friendsData = userData.friends;
 			if (!friendsData) friendsData = [];
-			friendsData.push(friends.toString());
+			friendsData.push(friend.toString());
+
+			// Remove the friend from the requests array
+			let requestsData = userData.requests;
+			if (requestsData) {
+				requestsData = requestsData.filter((req: string) => req !== friend);
+				userData = await db.users.update(userData.id, { requests: requestsData });
+				if (!userData) return NextResponse.json({ message: "Failed to update requests" }, { status: 500 });
+			}
+
 			userData = await db.users.update(userData.id, { friends: friendsData });
 			if (!userData) return NextResponse.json({ message: "Failed to update friends" }, { status: 500 });
+		}
+
+		let requests = formData.get("requests");
+		if(requests) {
+			if(!Array.isArray(requests)) return NextResponse.json({ message: "Invalid requests data" }, { status: 400 });
+			userData = await db.users.update(userData.id, { requests });
+			if (!userData) return NextResponse.json({ message: "Failed to update requests" }, { status: 500 });
 		}
         
         return NextResponse.json({ message: "User updated successfully", user: userData }, { status: 200 });
