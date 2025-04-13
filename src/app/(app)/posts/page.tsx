@@ -180,7 +180,7 @@ export default function PostsPage() {
                     />
                     <button
                         type="submit"
-                        className="px-4 py-2 bg-success-600 text-white rounded font-semibold"
+                        className="px-4 py-2 w-full bg-success-600 text-white rounded font-semibold"
                     >
                         Post
                     </button>
