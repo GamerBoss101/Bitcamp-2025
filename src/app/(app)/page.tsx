@@ -3,15 +3,13 @@
 import { useDevice } from "@/lib/context/DeviceContext";
 
 function Mobile() {
-	const { session } = useDevice();
-	let isAuthenticated = session == null ? false : true;
+	const { isAuthenticated, session } = useDevice();
 
 	return (
 		<main className="flex flex-col gap-[32px] row-start-2 items-center mt-10">
 			<h1 className="text-3xl sm:text-4xl font-bold tracking-[-.01em] text-center sm:text-left">
-				Welcome, {session?.name || "NULL"} !!
+				Welcome, {isAuthenticated ? session.name : ""} !!
 			</h1>
-
 			{isAuthenticated ? (
 				<div>
 					<button type="button" className="btn bg-surface-500">
@@ -33,13 +31,12 @@ function Mobile() {
 }
 
 function Web() {
-	const { session } = useDevice();
-	let isAuthenticated = session == null ? false : true;
+	const { isAuthenticated, session } = useDevice();
 
 	return (
 		<main className="flex flex-col row-start-2 items-center mt-10">
 			<h1 className="text-3xl sm:text-4xl font-bold tracking-[-.01em] text-center sm:text-left">
-				Welcome, {session?.name || "NULL"} !!
+				Welcome, {isAuthenticated ? session.name : ""} !!
 			</h1>
 
 			{isAuthenticated ? (

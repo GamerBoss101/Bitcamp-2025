@@ -7,6 +7,7 @@ interface DeviceContextProps {
     isSafari: boolean;
     isMobile: boolean;  
     session: any | null;
+    isAuthenticated: boolean;
 }
 
 const DeviceContext = createContext<DeviceContextProps | undefined>(undefined);
@@ -15,6 +16,8 @@ export const DeviceProvider: React.FC<{ children: React.ReactNode }> = ({ childr
     const [isSafari, setIsSafari] = useState<boolean>(false);
     const [isMobile, setIsMobile] = useState<boolean>(false);
     const [session, setSession] = useState<any>(null);
+
+    const isAuthenticated = !!session;
 
     useEffect(() => {
         setIsSafari(rdd.isSafari);
@@ -35,7 +38,7 @@ export const DeviceProvider: React.FC<{ children: React.ReactNode }> = ({ childr
     }, []);
 
     return (
-        <DeviceContext.Provider value={{ isSafari, isMobile, session }}>
+        <DeviceContext.Provider value={{ isSafari, isMobile, session, isAuthenticated }}>
             {children}
         </DeviceContext.Provider>
     );
