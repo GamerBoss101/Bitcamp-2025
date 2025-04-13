@@ -4,10 +4,8 @@ import React from "react";
 import { Navigation } from "@skeletonlabs/skeleton-react";
 import {
     Home as IconHome,
-    Folder as IconFolder,
     BookText as BookImage,
-    Music as IconMusic,
-    Video as IconVideo,
+    Coins as CoinsImage,
 } from "lucide-react";
 
 import { useRouter } from "next/navigation";
@@ -21,6 +19,9 @@ const Footer = () => {
                 </Navigation.Tile>
                 <Navigation.Tile label="Info" href="/info" className="flex flex-col items-center">
                     <BookImage />
+                </Navigation.Tile>
+                <Navigation.Tile label="Points Guide" href="/points-guide" className="flex flex-col items-center">
+                    <CoinsImage />
                 </Navigation.Tile>
             </Navigation.Bar>
         </div>
