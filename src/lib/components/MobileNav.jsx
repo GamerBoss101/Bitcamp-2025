@@ -20,7 +20,7 @@ const Footer = () => {
                 <Navigation.Tile label="Info" href="/info" className="flex flex-col items-center">
                     <BookImage />
                 </Navigation.Tile>
-                <Navigation.Tile label="Points Guide" href="/points-guide" className="flex flex-col items-center">
+                <Navigation.Tile label="Points Guide" href="/pointsguide" className="flex flex-col items-center">
                     <CoinsImage />
                 </Navigation.Tile>
             </Navigation.Bar>
